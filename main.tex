@@ -7,7 +7,6 @@ sorting=ynt
 ]{biblatex}
 \addbibresource{refs.bib}
 
-\usepackage{parskip}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -24,10 +23,12 @@ sorting=ynt
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
 
 \preto{\lemma}{\needspace{4cm}}
 \preto{\section}{\needspace{5cm}}
 \preto{\subsection}{\needspace{3cm}}
+\preto{\example}{\needspace{3cm}}
 
 \title{Heart of the Four Color Theorem}
 \author{Timothy van der Valk}
@@ -68,7 +69,8 @@ This document gives a chronological overview of the results that led to the proo
 \section{Configurations}
 \label{sec:config}
 
-\section{C/D Reducibility}
+\section{D-Reducibility}
+\section{C-Reducibility}
 \label{sec:reduce}
 
 \pagebreak

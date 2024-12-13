@@ -1,0 +1,76 @@
+\documentclass{article}
+
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage{listofitems}
+\usepackage{xstring}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{external}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\preto{\lemma}{\needspace{4cm}}
+\preto{\section}{\needspace{5cm}}
+\preto{\subsection}{\needspace{3cm}}
+
+\title{An Overview of the Four-Color Theorem}
+\author{Timothy van der Valk}
+\date{November 2024 - January 2025}
+
+\newcommand{\digitToNum}[1]{\the\numexpr#1\relax}
+\newcommand{\scheme}[2]{
+    \readlist*\mylist{#2}
+     \tikz[baseline]{ 
+        \foreach \x [count=\i] in {#1} {
+            \coordinate (\i) at (0.3*\i, 0.225); \node[text height=0mm] at (0.3*\i,0) {$\x$};
+        } 
+        \foreachitem \z \in \mylist {
+            \StrChar{\z}{1}[\left]
+            \StrChar{\z}{2}[\right]
+            \StrChar{\z}{3}[\color]
+            \path (\left) edge[bend left=45] node[above, yshift=-2]{\small$\color$} (\right);
+        }
+    }
+} 
+
+\begin{document}
+
+\maketitle
+
+A new proof of the four-color theorem has been given by Thomas et al \cite{thomas} in 1995 as a response to the Appel and Haken proof from 1976. Both proofs of the four-color theorem depend on three smaller theorems and a set of configurations that together contradict the existence of a minimal counterexample. The difference is that the new proof has a set of 633 configurations compared to 1476 members of the old one.
+
+Much of the difficulty from reading the proof of the four-color theorem comes from the confusing language of dated papers and incomplete or hasty steps in proofs. This document elaborates on such details left out by the original papers and papers and tries to put a logical order to it all.
+
+
+\tableofcontents
+
+\pagebreak
+\input{parts/introduction.tex}
+\input{parts/birkhoff.tex}
+
+
+\section{Configurations}
+\label{sec:config}
+
+\section{C/D Reducibility}
+\label{sec:reduce}
+
+\pagebreak
+\printbibliography
+
+\end{document}

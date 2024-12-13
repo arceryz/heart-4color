@@ -3,15 +3,24 @@
 
 Before 1913, the only known reductions of maps we're the reductions to triangulations and the reduction of multiply-connected regions to fewer regions (holed regions). In 1913, Birkhoff \cite{birkhoff} proved a new reduction result for \textit{rings} that seperate two parts of a map. This result spurred new developments in the reduction of graphs that opened the path towards reducible configurations and finally the proof of Appel and Haken in 1976.
 
-We will use the term \textit{map} to refer to a map of connected \textit{regions} that we wish to four-color. From such a map we can construct a \textit{planar graph} where each region represents a vertex. We will be working with graphs in all our proofs, but might sometimes mention maps for intuition. We denote by $|G|$ the number of vertices in the graph $G$.
+We will use the term \textit{map} to refer to a map of connected \textit{regions} that we wish to four-color. From such a map we can construct a \textit{planar graph} where each region represents a vertex. We will be working with graphs in all our proofs, but might sometimes mention maps for intuition.
 
-Let us begin by defining a ring of a graph.
+We have the following well-known reduction to triangulations.
+
+\begin{theorem}
+    Given a planar graph $G$ with a non-triangular bounded face. Then the coloring of $G$ can be reduced to a graph on $H$ less vertices.
+\end{theorem}
+\begin{proof}
+    A non-triangular bounded face of $G$ corresponds to a cycle of size greater than three in $G$. Combine any two non-neighboring vertices in this cycle to form a graph on one less vertex $H$. Given a coloring of $H$, we may color the two contracted vertices the same to obtain a coloring of $G$.
+\end{proof}
+
+The configurations in a graph that Birkhoff worked on reducing are rings. Let us define them.
 
 \begin{definition}
     A ring of $n$ vertices $R_n$ in a graph $G$ is an induced cycle of $G$ that encloses at least one vertex.
 \end{definition}
 
-The key property of rings is that they seperate the full graph $G$ in three parts $M_1$, $R$ and $M_2$. That is, $G$ is of the form $G = M_1 + R + M_2$. The notation $A + B$ indicates a \textbf{direct} connection between the subgraphs $A$ and $B$. Since the ring seperates $M_1$ and $M_2$, they are not directly connected together.
+The key property of rings is that they seperate the full graph $G$ in three parts $M_1$, $R$ and $M_2$. That is, $G$ is of the form $G = M_1 + R + M_2$. The order is important when adding graphs. The addition here means that $M_1$ is directly connected to $R$ and $R$ is directly connected to $M_2$. However, $M_1$ is \textbf{not} directly connected to $M_2$. 
 
 \begin{figure}[!ht]
     \centering
@@ -23,16 +32,56 @@ The key property of rings is that they seperate the full graph $G$ in three part
         \node at (0, 2.25) {$M_2$};
         \node at (0, 0) {$M_1$};
     \end{tikzpicture}
-    \caption{The graph $G = M_1 + R + M_2$.}
+    \caption{The graph $M_1 + R + M_2$.}
 \end{figure}
 
-To reduce a ring like this, we may try to color $M_1+R$ and $M_2+R$ individually such that the colors on $R$ agree. Then we can combine both colorings together to form a coloring of the full graph $G$. This is the key idea of Birkhoff reducibility.
+To reduce a ring like this, we may try to color $M_1+R$ and $M_2+R$ individually such they have a common coloring on $R$. If such a common coloring can be found, then we may attach both colorings together to form a coloring of $G$. Hence we would be reducing the coloring of $G$ to coloring the parts $M_1+R$ and $M_2+R$ instead on less vertices.
 
-However, we do not know if such a common coloring of $M_1+R$ and $M_2+R$ always exists. Birkhoff's paper concerned itself with the conditions under which this, or a weaker result, is possible.
+Under which conditions can we find a common coloring? If a common coloring can not be found, is there a weaker result that holds? These questions we shall answer in this section.
 
-\subsection{Kempe Chains and Ring Schemes}
+\subsection{Ring Schemes}
 
-To make our coloring proofs easier, we need some definitions and notation to rewrite one coloring to another more easily. We will begin by defining chains of alternating colors connected to a vertex $v$.
+A naive way of finding a common ring coloring for $M_1+R$ and $M_2+R$ would be to simply evaluate all possible colorings of either side. Let us mathematically define this naive approach and then improve upon it.
+
+\begin{definition}
+    Let all the four-colorings of a graph $G$ and all the four-colorings of a subgraph $H \subset G$ in the colorings of $G$ be defined as $X(G)$ and $X(H\subset G)$ respectively.
+\end{definition}
+
+Using this definition, all common ring colorings of $M_1+R$ and $M_2+R$ can be defined as
+
+\begin{equation}
+    X(R \subset M_1+R) \cap X(R \subset M_2+R)
+\end{equation}
+
+At first glance it might seem like a useless statement since we have arbitrary $M_1$ and $M_2$, but a key realization is that there are only a finite number of four-colorings of the ring. We have the following ring colorings up to a permutation of colors.
+
+\begin{equation}
+    \begin{matrix*}[l]
+        R_1 \rightarrow & \{ a \}\\
+        R_2 \rightarrow & \{ ab \} \\
+        R_3 \rightarrow & \{ abc \} \\
+        R_4 \rightarrow & \{ abab, \quad abac, \quad baca, \quad abcd \}\\
+    \end{matrix*}
+\end{equation}
+
+Which of these ring colorings are possible will depend on the vertices surrounding $R$. If $M_1$ for example consists of a single vertex connected to all vertices of $R_4$, then we may not use the coloring $abcd$ on the ring, since that would require five colors.
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}
+        \node (v1) at (-1, 0) {$a$};
+        \node (v2) at (0, 1) {$b$};
+        \node (v3) at (1, 0) {$a$};
+        \node (v4) at (0, -1) {$b$};
+        \node (c) at (0, 0) {$c$};
+
+        % Draw the edges
+        \draw (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+        \draw (v1) -- (c) -- (v3);
+        \draw (v2) -- (c) -- (v4);
+    \end{tikzpicture}
+    \caption{The coloring $abcd$ is not possible without using five colors. }
+\end{figure}
 
 \begin{definition}
     Given two colors $a,b$ and a coloring of a graph $G$. The $ab$-chain of a vertex $v \in G$ consists of all vertices colored $a,b$ that are connected to $v$ through other vertices colored $a,b$.

@@ -1,0 +1,39 @@
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+        \draw (0,0.5) node { $\Phi_0(C)$ };
+        \draw (3,0.5) node { $\Phi_1(C)$ };
+        \draw (8,0.5) node { $\overline{\Phi}(C)$ };
+        \draw (10.5,0.5) node { $\Phi(n)$ };
+
+        \draw (0,0) ellipse (8mm and 12mm);
+        \draw (3,0) ellipse (8mm and 12mm);
+        \draw (8,0) ellipse (8mm and 12mm);
+        \draw (10.5,0)[dotted, thick] ellipse (8mm and 12mm);
+
+        \draw[fill, black] (0.1,0.0) circle (0.5mm);
+        \draw[fill, black] (-0.3,-0.13) circle (0.5mm);
+
+        \draw[fill, black] (3+0.1,0.0) circle (0.5mm);
+        \draw[fill, black] (3+-0.3,-0.13) circle (0.5mm);
+        \draw[fill, black] (3+0.17,-0.4) circle (0.5mm);
+
+        \draw[fill, black] (8+0.1,0.0) circle (0.5mm);
+        \draw[fill, black] (8+-0.3,-0.13) circle (0.5mm);
+        \draw[fill, black] (8+0.17,-0.4) circle (0.5mm);
+        \draw[fill, black] (8-0.2,-0.5) circle (0.5mm);
+
+        \draw[fill, black] (10.5+0.1,0.0) circle (0.5mm);
+        \draw[fill, black] (10.5+-0.3,-0.13) circle (0.5mm);
+        \draw[fill, black] (10.5+0.17,-0.4) circle (0.5mm);
+        \draw[fill, black] (10.5-0.2,-0.5) circle (0.5mm);
+
+        \node at (1.5, 0) { $\Longleftarrow$ };
+        \node at (4.5, 0) { $\Longleftarrow$ };
+        \node at (5.3, 0) { $\ldots$ };
+        \node at (6.2, 0) { $\Longleftarrow$ };
+        \node at (9.25,0) { $=$ };
+    \end{tikzpicture}
+
+    \caption{D-reducibility requires that all ring colorings can be converted to a valid ring coloring of $C$ in $\Phi_0(C)$.}
+\end{figure}

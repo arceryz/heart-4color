@@ -7,6 +7,9 @@ sorting=ynt
 ]{biblatex}
 \addbibresource{refs.bib}
 
+\usepackage{soul}
+\usepackage{ifthen}
+\usepackage[makeroom]{cancel}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -34,6 +37,10 @@ sorting=ynt
 \author{Timothy van der Valk}
 \date{November 2024 - January 2025}
 
+\newcommand{\I}{\text{I}}
+\newcommand{\II}{\text{II}}
+\newcommand{\compat}{\implies}
+\newcommand{\ncompat}[1]{\stackrel{#1}{\compat}}
 \newcommand{\digitToNum}[1]{\the\numexpr#1\relax}
 \newcommand{\scheme}[2]{
     \readlist*\mylist{#2}
@@ -45,7 +52,10 @@ sorting=ynt
             \StrChar{\z}{1}[\left]
             \StrChar{\z}{2}[\right]
             \StrChar{\z}{3}[\color]
-            \path (\left) edge[bend left=45] node[above, yshift=-2]{\small$\color$} (\right);
+            \StrChar{\z}{4}[\cross]
+            \path (\left) edge[bend left=45] node[above, yshift=-2]{\small 
+            \ifthenelse{\equal{\cross}{-}}{$\cancel{\color}$}{$\color$}
+            } (\right);
         }
     }
 } 
@@ -56,22 +66,16 @@ sorting=ynt
 
 A new proof of the four-color theorem has been given by Thomas et al \cite{thomas} in 1995 as a response to the Appel and Haken proof from 1976. Both proofs of the four-color theorem depend on three smaller theorems and a set of configurations that together contradict the existence of a minimal counterexample. The difference is that the new proof has a set of 633 configurations compared to 1476 members of the old one.
 
-This document gives a chronological overview of the results that led to the proof of the four color theorem. Several proofs are rewritten to a more exact mathematical language. The sections are ordered chronologically in the intuitive way to follow the proof.
-
+This document elaborates on the key concepts and results of reducibility underlying the four color theorem. The theory is built up from an intuitive and chronological point of view. Every definition is strongly motivated before being introduced. Ring reducibility results of Birkhoff have been rewritten using solid definitions and new notation and figures are included for most intuitive explanations. In addition, several examples of the types of reducibility are given. The C-reducibility of the Birkhoff diamond is proven and its full reducibility structure is visualised.
 
 \tableofcontents
 
 \pagebreak
 \input{parts/introduction.tex}
 \input{parts/birkhoff.tex}
-
-
-\section{Configurations}
-\label{sec:config}
-
-\section{D-Reducibility}
-\section{C-Reducibility}
-\label{sec:reduce}
+\input{parts/dreduce.tex}
+\input{parts/creduce.tex}
+\input{parts/diamond.tex}
 
 \pagebreak
 \printbibliography

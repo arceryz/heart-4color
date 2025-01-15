@@ -111,6 +111,18 @@ In addition, we introduce a notation for writing down the colors on a ring $R$ a
     \caption{Examples of rings $R_4$ and $R_5$ with chains. A layout of chains on the ring can be indicated with the ring scheme notation. }
 \end{figure}
 
+The key property of ring schemes is that we may freely flip $ab$-chains for vertices that are seperated by a $cd$-chain, since these $ab$-chains can never be connected.
+
+\begin{definition}
+    A ring scheme $x$ implies another ring scheme $y$ if $y$ can be obtained from $x$ by flipping an $ab$-chain. In this case we write $x \compat y$.
+\end{definition}
+
+For example, in the earlier figure of a ring scheme on $R_4$ we have
+
+\begin{equation*}
+    \scheme{a,b,c,b}{{13}} \compat \scheme{a,b,c,d}{{13}}.
+\end{equation*}
+
 We will now use the concepts of chains and ring schemes to prove that the ring $R_4$ is 0-reducible and the ring $R_5$ 1-reducible.
 
 \subsection{The ring $R_4$ is 0-reducible}
@@ -127,19 +139,19 @@ Let us consider the possible ring colorings I and II of the graphs $M_1+R_4$ and
 If any of these two colorings in I and II are equal (up to permutation), we are done. Otherwise, we may assume that
 
 \begin{equation}
-    \text{I} = \{ abab \}\quad \text{and} \quad \text{II} = \{ abac, baca \}.
+    \{ abab \}\subset \I \quad \text{and}  \quad \{ abac, baca \} \subset \II.
 \end{equation}
 
 Now suppose that there is an $ad$-chain between $v_1$ and $v_3$ in $I(abab)$. We are allowed to flip the $bc$-chain of $v_4$ without affecting $v_2$ because the $ad$-chain in complementary colors seperates them. Thus we obtain
 
 \begin{equation}
-    \text{I}(abab) \cong \scheme{a,b,a,b}{13d} \cong \text{II}(abac)
+    \I(abab) = \scheme{a,b,a,b}{13d} \compat \II(abac)
 \end{equation}
 
 If there is no such $ad$-chain between $v_1$ and $v_3$, then likewise we are allowed to flip the $ad$-chain of $v_3$ without affecting $v_1$ to obtain
 
 \begin{equation}
-    \text{I}(abab) \cong \text{I}(abcb) \cong \text{II}(baca).
+    \I(abab) = \scheme{a,b,a,b}{13d-} \compat \I(abcb) = \II(baca).
 \end{equation}
 
 In any case, we obtain a common coloring between I and II. Therefore the ring $R_4$ is 0-reducible.
@@ -164,10 +176,10 @@ This is an intuition as to why it might be hard to prove that $R_5$ is 0-reducib
 Therefore we assume the following colorings for I and II:
 
 \begin{equation}
-    \text{I, II}, = \left\{ \begin{matrix}
+    \left\{ \begin{matrix}
         \text{one of}\;\underline{c}abab \; \text{with $c$ free}, \\
         \text{all of}\;a{*}{*}a{*} \; \text{with $a$  non-adjacent}
-    \end{matrix}\right\}.
+    \end{matrix}\right\} \subset \text{I, II}.
 \end{equation}
 
 Now we will prove that for these two sets, we can always deduce a common coloring on the ring $R_5$. To this end, we will prove two lemma's.
@@ -185,26 +197,26 @@ Let a vertex colored uniquely in one of $\underline{c}abab$ be called the \emph{
 \end{lemma}
 
 \emph{Proof of Lemma \ref{lem:r5_first}}.
-Let two non-adjacent colorings $\text{I}(\underline{c}abab)$ and $\text{II}(ab\underline{c}ab)$ be given. Suppose that a $bc$-chain connects $v_3$ and $v_5$ in $\text{II}(ab\underline{c}ab)$. Then we obtain
+Let two non-adjacent colorings $\I(\underline{c}abab)$ and $\II(ab\underline{c}ab)$ be given. Suppose that a $bc$-chain connects $v_3$ and $v_5$ in $\II(ab\underline{c}ab)$. Then we obtain
 
 \begin{equation}
     \label{eq:abcab}
-    \text{II}(ab\underline{c}ab) \cong \scheme{a,b,c,a,b}{35} \cong \text{II}(abcdb).
+    \II(ab\underline{c}ab) =\scheme{a,b,c,a,b}{35b} \compat \II(abcdb).
 \end{equation}
 
 If no such chain exists, then we may flip the $bc$-chain of $v_3$ to obtain
 
 \begin{equation}
-    \text{II}(ab\underline{c}ab) \cong \text{II}(a\underline{c}bab) \;\; \text{adjacent to} \;\; \text{I}(\underline{c}abab).
+    \II(ab\underline{c}ab) = \scheme{a,b,c,a,b}{35b-} \compat \II(a\underline{c}bab) \;\; \text{adjacent to} \;\; \I(\underline{c}abab).
 \end{equation}
 
-Now to deal with the former coloring, we consider the coloring $\text{I}({*}b{*}{*}b)$. The three unique possibilities for the colors lead to
+Now to deal with the former coloring, we consider the coloring $\I({*}b{*}{*}b)$. The three unique possibilities for the colors lead to
 
 \begin{equation}
     \begin{matrix*}[l]
-        \text{I}(abcdb) \quad\quad\cong&\text{II}(abcdb) \; \text{from (\ref{eq:abcab}),}  \\
-        \text{I}(cbc\underline{d}b) \;\; \text{adjacent to}&\text{II}(ab\underline{c}ab), \;  \\
-        \text{I}(db\underline{c}db) \quad\quad\cong&\text{II}(ab\underline{c}ab).
+        \I(abcdb) \quad\quad =&\II(abcdb) \; \text{from (\ref{eq:abcab}),}  \\
+        \I(cbc\underline{d}b) \;\; \text{adjacent to}&\II(ab\underline{c}ab), \;  \\
+        \I(db\underline{c}db) \quad\quad =&\II(ab\underline{c}ab).
     \end{matrix*}
 \end{equation}
 
@@ -213,35 +225,35 @@ A similar argument holds for any other pair of non-adjacent colorings for I and 
 \vspace{1em}
 \emph{Proof of Lemma \ref{lem:r5_second}}
 
-Let two adjacent colorings $\text{I}(\underline{c}abab)$ and $\text{II}(a\underline{c}bab)$ be given. Suppose a $bd$-chain connects $v_3$ and $v_5$ in $\text{II}(a\underline{c}bab)$. Then we obtain
+Let two adjacent colorings $\I(\underline{c}abab)$ and $\II(a\underline{c}bab)$ be given. Suppose a $bd$-chain connects $v_3$ and $v_5$ in $\II(a\underline{c}bab)$. Then we obtain
 
 \begin{equation}
-    \text{II}(a\underline{c}bab) \cong \scheme{a,c,b,a,b}{35d} \cong \text{I}(\underline{c}abab).
+    \II(a\underline{c}bab) = \scheme{a,c,b,a,b}{35d} \compat \I(\underline{c}abab).
 \end{equation}
 
 If no such chain exists, then we may flip the $bd$-chain of $v_3$ to obtain
 
 \begin{equation}
     \label{eq:acdab}
-    \text{II}(a\underline{c}bab) \cong \text{II}(acdab).
+    \II(a\underline{c}bab) = \scheme{a,c,b,a,b}{35d-} \compat \II(acdab).
 \end{equation}
 
-Now we consider the coloring $\text{I}(a{*}{*}a{*})$. The three unique possibilities for the colors lead to
+Now we consider the coloring $\I(a{*}{*}a{*})$. The three unique possibilities for the colors lead to
 
 \begin{equation*}
     \begin{matrix*}[l]
-        \text{I}(acdab) \quad\cong& \text{II}(acdab), \;\text{from (\ref{eq:acdab})},\\
-        \text{I}(ac\underline{d}ac) \; &\text{shifted two to right of $\text{I}(\underline{c}abab)$}, \\
-        \text{I}(a\underline{c}dad) \quad\cong& \text{II}(a\underline{c}bab).
+        \I(acdab) \quad =& \II(acdab), \;\text{from (\ref{eq:acdab})},\\
+        \I(ac\underline{d}ac) \; &\text{shifted two to right of $\I(\underline{c}abab)$}, \\
+        \I(a\underline{c}dad) \quad =& \II(a\underline{c}bab).
     \end{matrix*}
 \end{equation*}
 
 By following this procedure, we end up with either a common coloring, or a coloring that is shifted two to the right.
 
-We can repeat this procedure again with $\text{II}(a\underline{c}bab)$ and $\text{I}(ac\underline{d}ac)$, to obtain $\text{II}(aba\underline{c}b)$. Another repetition yields another shifted coloring for I. Hence we obtain the pattern
+We can repeat this procedure again with $\II(a\underline{c}bab)$ and $\I(ac\underline{d}ac)$, to obtain $\II(aba\underline{c}b)$. Another repetition yields another shifted coloring for I. Hence we obtain the pattern
 
 \begin{equation}
-    \text{I}(\underline{c}abab) \rightarrow \text{I}(ab\underline{c}ab) \rightarrow \text{I}(abab\underline{c}) \rightarrow \text{I}(a\underline{c}bab) \cong \text{II}(a\underline{c}bab).
+    \I(\underline{c}abab) \rightarrow \I(ab\underline{c}ab) \rightarrow \I(abab\underline{c}) \rightarrow \I(a\underline{c}bab) = \II(a\underline{c}bab).
 \end{equation}
 
 A similar argument holds for any pair of adjacent colorings of I and II. Therefore, in all cases, we obtain a common coloring $\qedsymbol$.
@@ -275,7 +287,7 @@ An equivalent definition is that of \emph{internally 6-connected triangulations}
 
 These two are equivalent because cuttings sets are the same as rings.
 \\
-Let us finish this section with one last result to tickle our intuition.
+Let us finish this section with one last result to test our intuition.
 
 \begin{theorem}
     The four color theorem is equivalent to $R_5$ being 0-reducible.
@@ -283,10 +295,10 @@ Let us finish this section with one last result to tickle our intuition.
 
 \begin{proof}
 \hfill\newline
-$\Longrightarrow$ Suppose the four color theorem is true, then we know that any planar graph $M_1 + R_5 + M_2$ is four-colorable. Given such a four-coloring, we will obtain a common coloring for $M_1+R_5$ and $M_2+R_5$ $\qedsymbol$.\\
+$\Longrightarrow$ Suppose the four color theorem is true, then we know that any planar graph $M_1 + R_5 + M_2$ is four-colorable. Given such a four-coloring, we will obtain a common coloring for $M_1+R_5$ and $M_2+R_5$.\\
 $\Longleftarrow$ Suppose that $R_5$ is 0-reducible. Given a minimal counterexample to the four color theorem $G$, then we have that there exists a vertex $v$ of degree at most five in $G$. Because $G$ is a triangulation, the neighbors of $v$ must form $R_5$. Because all rings smaller or equal to $R_5$ are 0-reducible, we may always reduce $G$ to two components $M_1+R_5$ and $v+R_5$, both of which are smaller than $G$. Therefore $G$ is four colorable and no minimal counterexample can exist.
 \end{proof}
 
-Since we are writing this document knowing that the four color theorem is true, we know that the ring $R_5$ is also 0-reducible. Because it might seem so easy to prove that $R_5$ is 0-reducible, it was in fact Alfred Kempe himself who gave the first false proof of the four color theorem by proving that $R_5$ is 0-reducible. See \cite{kempe}.
+Since we already know that the four color theorem is true, we know that the ring $R_5$ is also 0-reducible. Because it might seem so easy to prove that $R_5$ is 0-reducible, it was in fact Alfred Kempe himself who gave the first false proof of the four color theorem. See \cite{kempe}.
 
 Despite his failed proof, he continued on to introduce the concept of rings to mathematics on which this section is based, and these rings ended up at the heart of the four color theorem.

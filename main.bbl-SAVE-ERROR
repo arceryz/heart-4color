@@ -1,0 +1,112 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{kempe}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b5e6cf9b2b99991d65036defb9e3be9a}{%
+           family={Kempe},
+           familyi={K\bibinitperiod},
+           given={Alfred\bibnamedelima Bray},
+           giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \strng{fullhash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \strng{bibnamehash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \strng{authorbibnamehash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \strng{authornamehash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \strng{authorfullhash}{b5e6cf9b2b99991d65036defb9e3be9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Journal of Mathematics}
+      \field{number}{3}
+      \field{title}{On the Geographical Problem of the Four Colours}
+      \field{volume}{Vol. 2}
+      \field{year}{1879}
+    \endentry
+    \entry{birkhoff}{article}{}
+      \name{author}{1}{}{%
+        {{hash=146d5c1c950d4267bab0133a1e59eb04}{%
+           family={Birkhoff},
+           familyi={B\bibinitperiod},
+           given={George\bibnamedelima David},
+           giveni={G\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{146d5c1c950d4267bab0133a1e59eb04}
+      \strng{fullhash}{146d5c1c950d4267bab0133a1e59eb04}
+      \strng{bibnamehash}{146d5c1c950d4267bab0133a1e59eb04}
+      \strng{authorbibnamehash}{146d5c1c950d4267bab0133a1e59eb04}
+      \strng{authornamehash}{146d5c1c950d4267bab0133a1e59eb04}
+      \strng{authorfullhash}{146d5c1c950d4267bab0133a1e59eb04}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Journal of Mathematics}
+      \field{number}{2}
+      \field{title}{The Reducibility of Maps}
+      \field{volume}{Vol. 35}
+      \field{year}{1913}
+    \endentry
+    \entry{thomas}{article}{}
+      \name{author}{4}{}{%
+        {{hash=30004d929a781bee1262997e1b576502}{%
+           family={Robertson},
+           familyi={R\bibinitperiod},
+           given={Neil},
+           giveni={N\bibinitperiod}}}%
+        {{hash=d53029b470428cb164bf79194ca39bd9}{%
+           family={Sanders},
+           familyi={S\bibinitperiod},
+           given={Daniel\bibnamedelima P.},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=295a42902de7a6cc6dcb94ca30637596}{%
+           family={Seymour},
+           familyi={S\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=636ffdd00ee890af41f40d857746827f}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{9a1df79c49e17a5f0128ea3493dfaf9f}
+      \strng{fullhash}{ca55ce33019ac31e65d05ec2f1a1d565}
+      \strng{bibnamehash}{9a1df79c49e17a5f0128ea3493dfaf9f}
+      \strng{authorbibnamehash}{9a1df79c49e17a5f0128ea3493dfaf9f}
+      \strng{authornamehash}{9a1df79c49e17a5f0128ea3493dfaf9f}
+      \strng{authorfullhash}{ca55ce33019ac31e65d05ec2f1a1d565}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electronic Research Announcements American Mathematical Society}
+      \field{number}{1}
+      \field{title}{A New Proof of the Four-Color Theorem}
+      \field{volume}{2}
+      \field{year}{1996}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

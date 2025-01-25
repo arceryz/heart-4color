@@ -1,0 +1,20 @@
+\section*{Summary}
+\label{sec:summary}
+
+The four color theorem states that every map can be colored with four colors in such a way, that two neighboring regions receive different colors. Such a coloring is desired for a world map, because it becomes easy to tell two neighboring regions apart. It has been observed by many map makers that four colors suffice. The problem was first formulated by Francis Guthrie in 1852 while coloring the map of England. He brought the problem to his brother Frederick Guthrie, who in turn brought the problem to his mathematics lecturer Augustus De Morgan. 
+
+At the heart of the famous proof of the four color theorem by Appel and Haken in 1976 \cite{appel} is shown that the problem of coloring any map can be reduced to the coloring of a map with less regions. By repeating this result on the smaller map, the coloring problem eventually turns trivial. The two key concepts used in showing this are 1. \textit{Reducibility} and 2. \textit{Unavoidability}. 
+
+Reducibility develops the theory about breaking maps up into smaller pieces that are easier to color. There are three forms of reducibility used in the four color theorem. Each builds upon the previous.
+
+\begin{enumerate}
+\item \textit{Ring-reducibility} breaks up maps that contain \textit{rings} of regions surrounding other regions. It is shown that the interior and exterior regions of certain rings can always be colored in such a way that the colors match on the ring. This allows us to color the interior and exterior seperately, hence breaking the map into two pieces. 
+
+\item \textit{D-reducibility} builds upon Ring-reducibility. Given a ring in a map with a certain arrangement of regions on the interior called a \textit{configuration}, it is shown that any coloring outside of the ring can be extended to match a coloring for the inside. 
+
+\item \textit{C-reducibility} extends upon D-reducibility by first replacing the configuration with a smaller \textit{reducer}. The colorings of the reducer can then be extended to match the original configuration.
+\end{enumerate}
+
+\textit{Unavoidability} builds upon the concept of configurations. Here it is shown that it is \textit{unavoidable} that a map contains a configuration or ring that is reducible. Therefore every map can be broken down into pieces that are trivial to color. This part uses the \textit{discharge method} to prove a certain finite set of configurations is unavoidable in a map. A computer is then used to check that each of these configurations (well over 600, 1400 or even 2800 of them) is in fact, reducible.
+
+The first proof of the four color theorem had a set of 1478 configurations to check. An improvement was made by Neil Robertson et al. \cite{thomas} in 1996 who reduced the set to only 633 configurations that are either C or D-reducible. Lastly, an improvement was made by John P. Steinberger in 2009 who used only D-reducibility at the cost of having to check 2822 configurations. A proof that does not utilize a computer is still unavailable.

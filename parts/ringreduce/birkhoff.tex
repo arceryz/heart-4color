@@ -1,0 +1,35 @@
+\section{Ring $k$-Reducibility}
+\label{sec:birkhoff}
+
+\subsection{Birkhoff graphs}
+
+Now that we have proven two new reducibiliy results, we want to put them in the context of the four color theorem. In particular, we are interested in the nature of minimal counterexamples. Let $G$ be a minimal counterexample to the four-color theorem.
+
+\begin{itemize}
+    \item By the 0-reducibility of $R_4$, the ring $R_4$ can not be present, since it can always be reduced. 
+    \item By the 1-reducibility of $R_5$, the ring $R_5$ can not be present with two or more vertices on both sides. In this case we can replace those two or more vertices on both sides with our auxiliary graphs $A_1$ and $A_2$ on at most one vertex, reducing the size of our graph.
+\end{itemize}
+
+A key definition in the three theorems for the four-color theorem is that of \emph{Birkhoff graphs}. These graphs are exactly those that remain after applying the ring reductions mentioned above.
+
+\begin{definition}
+    A Birkhoff graph $G$ is a planar triangulation without the ring $R_4$ and the ring $R_5$ of more than two vertices on either side.
+\end{definition}
+
+An equivalent definition is that of \emph{internally 6-connected triangulations} found in literature.
+
+\begin{definition}
+    An internally 6-connected graph $G$ is a graph where for any cutting set $X$ with $G\setminus X$ disconnected, $|X| \geq 6$ or $|X|=5$ with $G\setminus X$ having two components of which one is a single vertex.
+\end{definition}
+
+\begin{theorem}
+    Birkhoff graphs are equivalent to internally 6-connected triangulations.
+\end{theorem}
+
+\begin{proof}
+\hfill\newline
+$\Longrightarrow$ Given a Birkhoff graph $G$. Let $X$ be a cutting set in $G$. Suppose that $|X|=4$. Then either $X$ is a ring or $X$ can be made into a ring $R_4$ by adding a single edge to $G$ creating $G+e$. The graphs $G$ and $G+e$ are both Birkhoff graphs. Because of this, it they may not have a ring $R_4$. Therefore $|X| \geq 5$. 
+
+Now let $|X|=5$ with $G\setminus X$ having two or more components on more than one vertex. $X$ is either a ring or can be turned into one in $G+e$ for one of the components of $G\setminus X$. Both graphs $G$ and $G+e$ may not have the ring $R_5$ with more than two vertices on either side. Therefore $|X| \geq 6$ or $|X|=5$ with two components of which one is a single vertex.\\
+$\Longleftarrow$ Given an internally 6-connected triangulation $G$. If there is a ring $R_4$ in $G$, then $R_4$ is a cutting set of size 4. This is not possible because $G$ is an internally 6-connected. Similarly, suppose there is a ring $R_5$ with two or more vertices on both sides. Then $R_5$ is a cutting set of size 5 with more than two vertices in both components of $G\setminus R_5$. This is also not possible because $G$ is internally 6-connected.
+\end{proof}

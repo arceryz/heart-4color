@@ -1,0 +1,81 @@
+\subsection{Symmetry faults}
+
+If we come back to the red colorings from Figure \ref{table:bernhart}, they are the two colorings we call \textit{faults} R1 and R2. We will be working with the following colorings.
+
+\begin{equation}
+    \begin{aligned}
+        abcbacbc &\quad (R1)\\
+        abcbdcbc &\quad (R2)\\
+        abcbadbc &\quad (F1)\\
+        abcbacbd &\quad (F1\star)  \in \maxi{\ber}\\
+        abcbacac &\quad (G1) \in \maxi{\ber} \\
+        abcbdbcb &\quad (G2) \in \maxi{\ber} \\
+    \end{aligned}
+\end{equation}
+
+It was proven in 1947 by Bernhart \cite{bernhart} that the colorings $R1$ and $R2$ are in fact fixable. This is because their fixability depends on the broken coloring $F1$ that should be fixable. This is one of the black colorings we call \textit{symmetry fault}. We have the following implications.
+
+\begin{equation}
+    \begin{aligned}
+    R2 \compat \{ G2, &R1 \} \\
+    &\downarrow \\
+    &R1 \compat \{ G1, F1 \} \\
+    \end{aligned}
+\end{equation}
+
+Therefore, if $F1 \in \maxi{\ber}$ then $R1, R2 \in \maxi{\ber}$. The argument that Bernhart used was that the ring coloring $F1$ is symmetric to the coloring $F1\star \in \maxi{\ber}$, therefore it should also be fixable. The situation is sketched in Figure \ref{fig:symfault}.
+
+\needspace{4cm}
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[scale=1.5, mid arrow/.style={
+        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
+        \node (l1) at (-2, 0) { $a$ };
+        \node (l2) at (-1, 1) { $c(d)$ };
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (l3) at (-1, 0) {};
+        \node (l4) at (-1, -1) { $b$ };
+
+        \node (r1) at (2, 0) { $a$ };
+        \node (r2) at (1, 1) { $d(c)$ };
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (r3) at (1, 0) {};
+        \node (r4) at (1, -1) { $b$ };
+
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (c1) at (0, 0.5) {};
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (c2) at (0, -0.5) {};
+        \node (b1) at (0, 1) { $b$ };
+        \node (b2) at (0, -1) { $c$ };
+
+        \draw[thick, dotted] (0, -1.5) -- (0, 1.5);
+        \draw[opacity=1.0] (l1) -- (l2) -- (b1) -- (r2) -- (r1) -- (r4) -- (b2) -- (l4);
+        \draw[opacity=0.2] (c1) -- (b1);
+        \draw[opacity=0.2] (c2) -- (b2);
+
+        \draw [mid arrow, opacity=1.0] (l1) -- (l4);
+        \draw[opacity=0.2] (l1) -- (l3);
+        \draw[opacity=0.2] (l2) -- (l3) -- (l4);
+        \draw[opacity=0.2] (l2) -- (c1);
+        \draw[opacity=0.2] (c1) -- (l3) -- (c2);
+        \draw[opacity=0.2] (c2) -- (l4);
+        \draw[opacity=0.2] (c1) -- (c2);
+        \draw[opacity=0.2] (r2) -- (c1);
+        \draw[opacity=0.2] (c1) -- (r3) -- (c2);
+        \draw[opacity=0.2] (c2) -- (r4);
+        \draw[opacity=0.2] (r2) -- (r3) -- (r4);
+        \draw[opacity=0.2] (r1) -- (r3);
+    \end{tikzpicture}
+    \caption{Horizontal symmetry of the colorings $abcbadbc \; (F1)$ and $abcbacbd \;(F1\star)$ in brackets. }
+    \label{fig:symfault}
+\end{figure}
+
+We have not delved deeper into this problem, and do not know whether this is a fundamental flaw of implied colorings or an error in our code from \cite{johnp}. This proves that the Bernhart Diamond is in fact C-reducible, because the red colorings are incorrectly flagged so. The root of the problem being the colorings $F1$ and $F1\star$, we will call them \textit{symmetry faults}. In Figure \ref{fig:symfault}, the symmetry is a bijection between the vertices left and right of the symmetry line.
+
+\begin{definition}
+    A graph symmetry of $G$ is a bijection $f(v)$ on the vertices of $G$ that preserves the neighbors of every vertex.
+\end{definition}
+
+\begin{definition}
+    A \emph{symmetry fault} of a configuration $\confg$ is a coloring $x$ that is not in $\maxi{\confg}$, but whose symmetry $x\star = f(x)$ is.
+\end{definition}
+
+A future study on the symmetry fault in the Bernhart Diamond could lead to insights to improve the definitions of C and D-reducibility. One would first verify if it is a computational error, and then try to find more examples. In Bernhart's 1947 paper \cite{bernhart}, the four colorings $R1, R2, F1$ and $F1\star$ were also the only problem case, therefore it is unlikely to be a coincide.
+

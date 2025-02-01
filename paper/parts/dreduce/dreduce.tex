@@ -1,0 +1,171 @@
+\clearpage
+\section{D-Reducibility}
+\label{sec:dreduce}
+
+We have seen that every configuration on $R_4$ is 0-reducible and on $R_5$ is 1-reducible. Naturally, we might try to examine the $k$-reducibility of $R_6$ and beyond. However, as we have seen in the increase in complexity for the 1-reducibility of $R_5$, this can be a tough problem. However, the difficulty of this problem lies in the fact the we try to prove the reducibility of \textit{all} configurations $\confg$ on $R_n$. 
+
+Individual configurations are much easier to examine. That is why a special theory was devised to analyse such indvidual configurations. Both D-reducibility and C-reducibility are a more refined form of the Kempe-chain arguments we gave for $k$-reducibility.
+
+\subsection{Definition with the Birkhoff Diamond}
+
+We will be working with an example, the \textit{Birkhoff Diamond}  ($\text{Bir}\Diamond$), which is a configuration on $R_6$ with 4 vertices in the core. See Figure \ref{fig:diamond}.
+
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[scale=1.5, mid arrow/.style={
+        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (l1) at (-2, 0) { };
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (l2) at (-1, 1) { };
+        \node[circle, fill, scale=0.015cm] (l3) at (-1, 0) {};
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (l4) at (-1, -1) {};
+
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (r1) at (2, 0) {};
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (r2) at (1, 1) {};
+        \node[circle, fill, scale=0.015cm] (r3) at (1, 0) {};
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (r4) at (1, -1) {};
+
+        \node[circle, fill, scale=0.015cm] (c1) at (0, 0.5) {};
+        \node[circle, fill, scale=0.015cm] (c2) at (0, -0.5) {};
+        \node (core) at (-0.65, 0.45) { $\core$ };
+        \node (ring) at (-1.7, 0.7) { $R_6$ };
+
+        \draw[opacity=0.2] (l1) -- (l2) -- (r2) -- (r1) -- (r4) -- (l4);
+        \draw [mid arrow, opacity=0.3] (l1) -- (l4);
+        \draw[opacity=0.2] (l1) -- (l3);
+        \draw[opacity=0.2] (l2) -- (l3) -- (l4);
+        \draw[opacity=0.2] (l2) -- (c1);
+        \draw (c1) -- (l3) -- (c2);
+        \draw[opacity=0.2] (c2) -- (l4);
+        \draw (c1) -- (c2);
+        \draw[opacity=0.2] (r2) -- (c1);
+        \draw (c1) -- (r3) -- (c2);
+        \draw[opacity=0.2] (c2) -- (r4);
+        \draw[opacity=0.2] (r2) -- (r3) -- (r4);
+        \draw[opacity=0.2] (r1) -- (r3);
+    \end{tikzpicture}
+    \caption{The Birkhoff Diamond $\confg = \bir$ with the core highlighted. }
+    \label{fig:diamond}
+\end{figure}
+
+An individual configuration on a ring is fully defined by its core $\core$ and the amount of edges each vertex of $\core$ has with the ring $R$. The Birkhoff Diamond is uniquely determined by the four vertices in the middle (its core) and the requirement that each vertex of $\core$ has a total of 5 edges in $\confg$. For vertices in the core, the distinction between various heads of a vertex indicates this degree in $\confg$. This is a convention set by Heesch \cite{heesch} in 1969. Four such vertex-heads are given below.
+
+\begin{equation*}
+    \begin{matrix}
+    \bullet &\quad \longrightarrow \quad &\deg(v)=5 \\
+    \cdot &\quad \longrightarrow \quad & \deg(v)=6 \\
+    \circ &\quad \longrightarrow \quad & \deg(v)=7 \\
+    \square &\quad \longrightarrow \quad  & \deg(v)=8 \\
+    \end{matrix}
+\end{equation*}
+
+We will show that $\bir$ is 0-reducible. Since we know the graph of $\bir$, we can write down all the colorings it can have on the ring. This is the set $\Phi(\bir)$ of 16 colorings. We have highlighted all the ring colorings of $R_6$ and those of in this set in Figure \ref{table:colsring6}.
+
+\needspace{4cm}
+\begin{figure}[!ht]
+    \centering
+    \begin{tabular}{ cccc }
+        $\Phi(6) $ & \\
+        \hline
+        ababab & abacbd & abcadc &  \cellcolor{g0} abcdab \\
+        \cellcolor{g0} ababac &  \cellcolor{g0} abacdb &  \cellcolor{g0} abcbab & abcdac \\
+        \cellcolor{g0} ababcb &  \cellcolor{g0} abacdc &  \cellcolor{g0} abcbac & abcdad \\
+        ababcd & abcabc &  \cellcolor{g0} abcbad & abcdbc \\
+        abacab & abcabd & abcbcb & abcdbd \\
+        \cellcolor{g0} abacac &  \cellcolor{g0} abcacb &  \cellcolor{g0} abcbcd &  \cellcolor{g0} abcdcb \\
+        abacad &  \cellcolor{g0} abcacd & abcbdb &  \cellcolor{g0} abcdcd \\
+        \cellcolor{g0} abacbc &  \cellcolor{g0} abcadb & abcbdc \\
+        \hline
+        31 & \\
+    \end{tabular}
+    \caption{The set $\Phi(6)$ and the valid colorings $\Phi(\bir)$ highlighted. }
+    \label{table:colsring6}
+\end{figure}
+
+To show that $\bir$ is 0-reducible, we must show that all those ring colorings that are not valid can be reconfigured using Kempe-chains to become valid. If we let $M+R_6$ be arbitrary, then we can expect any ring coloring of $R_6$. Let us consider the coloring $ababab$ for example. Suppose that $\chain{v_4}{v_6}{bd}$. This implies the following colorings.
+
+\begin{equation}
+    \begin{aligned}
+    \scheme{a,b,a,b,a,b}{46d} &\compat ababcb\\
+    \scheme{a,b,a,b,a,b}{46d-} &\compat ababad = ababac.
+    \end{aligned}
+\end{equation}
+
+\begin{equation}
+    ababab \compat \{ ababcb, ababac \}.
+\end{equation}
+
+Therefore, the coloring $ababab$ can be reconfigured into a valid coloring with only one Kempe-chain flip. We say that the coloring $ababab$ \textit{implies} the set of those two colorings. 
+
+\begin{definition}
+    A coloring $x$ implies a set of colorings $\II$ if every scheme $x^\star$ of $x$ implies a coloring $y \in \II$. Write $x \compat \II$.
+\end{definition}
+
+\begin{definition}
+    A set of colorings $\I$ implies $\II$ if every $x \in \I$ implies $\II$. Write $\I \implies \II$.
+\end{definition}
+
+The set of all colorings of $R_6$ that require one Kempe-chain flip to be reconfigured in the same way as $ababab$ is called the 1-implying set of $\bir$.
+
+\begin{equation}
+    \Phi_1(\bir) = \Phi_0(\bir)\; \cup \; \{ ababab, \;ababcd, \;abacab, \;abcbcb, \;abcdad \}.
+\end{equation}
+
+We write $\Phi_0(\bir) = \Phi(\bir)$. This set $\Phi_1(\bir)$ is the largest set that satisfies $\Phi_1(\bir) \compat \Phi(\bir)$. We may repeat what we did for $\Phi_1(\bir)$ to obtain sets of colorings that require 2, 3 and more chain flips to become a valid coloring. This is higher-order implication between sets of colorings, called \textit{n-implication}.
+
+\begin{equation}
+    \Phi_5(\bir) \compat \Phi_4(\bir) \compat \Phi_3(\bir) \compat \ldots \compat \Phi(\bir).
+\end{equation}
+
+\begin{definition}
+    A set of colorings $\I$ $n$-implies a set $\II$ if there exist sets $B_i$ for $0 < i < n$ such that $I \compat B_{n-1}$, $B_i \compat B_{i-1}$ and $B_1 \compat \II$. We write $\I \ncompat{n} \II$.
+\end{definition}
+
+\begin{definition}
+    The $n$-implying set $\Phi_n(\confg)$ of a configuration $\confg$ is the largest set of ring colorings such that $\Phi_n(C) \ncompat{n} \Phi_0(\confg) = \Phi(\confg)$. 
+\end{definition}
+
+Therefore the set $\Phi_5(\bir)$, for example, satisfies $\Phi_5(\bir) \ncompat{5} \Phi_0(\bir)$. To continue with our example, let us find all the $n$-implying sets of $\bir$. In the case of the Birkhoff Diamond, this includes all ring colorings of $R_6$. Each coloring can reconfigured to become valid. This is precisely what is required for D-reducibility. We say that colorings that can be reconfigured to valid colorings are \textit{good} colorings. A single bad coloring is problematic for D-reducibility.
+
+\needspace{2cm}
+\begin{figure}[!ht]
+    \centering
+    \begin{tabular}{ ccccccc }
+        $\Phi_0(\bir) $ & & $\Phi_1$ & $\Phi_2$ & $\Phi_3$ & $\Phi_4$ & $\Phi_5$ \\
+        \hline
+        ababac & abcadb & ababab & abacad & abacbd & abcabd & abcabc \\
+        ababcb & abcbab & ababcd & abcbdb & abcbdc & abcadc & \\
+        abacac & abcbac & abacab &        & abcdac & abcdbc & \\
+        abacbc & abcbad & abcbcb &        & abcdbd &        & \\
+        abacdb & abcbcd & abcdad &        &        &        & \\
+        abacdc & abcdab \\
+        abcacb & abcdcb \\
+        abcacd & abcdcd \\
+        \hline
+        16 & & 5 & 2 & 4 & 3 & 1 \\
+    \end{tabular}
+    \caption{ All $n$-implying sets of $\bir$. Together a total of 31 colorings. }
+    \label{table:diamondmap}
+\end{figure}
+
+\begin{definition}
+    The \emph{max-implying} set $\overline{\Phi}(\confg)$ of a configuration $\confg$ is the largest $n$-implying set  $\Phi_n(\confg)$.
+\end{definition}
+
+\begin{definition}
+    A configuration $\confg$ on $R_n$ is D-reducible if $\overline{\Phi}(\confg) = \Phi(n)$.
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+        \draw (0, 0) ellipse (3cm and 1.8cm);
+        \draw (0, -0.3) ellipse (2cm and 1.2cm);
+        \draw[fill opacity=0.4, pattern=north east lines] (0, -0.6) ellipse (1.2cm and 0.6cm);
+
+        \node at (0.0, -0.6) { $\Phi_0(C)$ };
+        \node at (0.0, 0.35) { $\Phi_1(C)$ };
+        \node at (0, 1.35) { $\Phi(n) = \overline{\Phi}(C)$ };
+    \end{tikzpicture}
+
+    \caption{The $n$-implying sets of $\confg$ are increasing in size. If they grow to the set of all ring colorings $\Phi(n)$, the configuration is D-reducible. }
+\end{figure}

@@ -171,14 +171,14 @@ class Grouping:
         return is_same_type() and has_no_mutual_overlap() and is_properly_connected()
 
 
-def import_graphs():
+def import_graphs(fname: str):
     class State(Enum):
         NEW = 1
         VERTEX = 2
         EDGE = 3
 
     # with open("vier-kleuren.txt", 'r') as f: # For the specific example
-    with open("./dreducecode/U_2822.conf", 'r') as f:
+    with open("./dreducecode/{0}".format(fname), 'r') as f:
         data = f.readlines()
 
     graphs = []
@@ -281,13 +281,13 @@ def find_all_ring_colorings(size: int):
     return recurse(graph, 0, coloring, colors_left)  #  result temporarily for possible displays
 
 
-def check_reducible(config: Config, colorings: list, groupings: dict):
+def check_reducible(config: Config, colorings: list, groupings: dict, implyingsets: list = []):
     results = []
     good_colorings = set()
     remaining_colorings = []
     remaining_groupings = {}
-    implyingsets = [ ]
     imply0 = []
+    total_colorings = len(colorings)
     for i in range(len(colorings)):
         k, _ = get_special_k(config.graph, COLORS, colorings[i], config.ring_size)
         if k is not None and ggd_test_service(config.graph, k):
@@ -303,6 +303,7 @@ def check_reducible(config: Config, colorings: list, groupings: dict):
 
     colorings = remaining_colorings
     groupings = remaining_groupings
+    count = len(imply0)
     diff = 1 # any nr > 0 to start
     # We expect to find new good colorings each time
     while diff > 0:
@@ -341,8 +342,9 @@ def check_reducible(config: Config, colorings: list, groupings: dict):
         diff = len(new_good_colorings)
         if len(implying) > 0:
             implyingsets.append(sorted(implying))
+            count += len(implying)
 
-    print("d-reducible map")
+    print("d-reducible map total {:d} out of {:d}".format(count, total_colorings))
     for i in range(len(implyingsets)):
         imp = implyingsets[i]
         print("[phi-{:d} nr={:3d}] =".format(i, len(imp)), end=" ")
@@ -721,7 +723,6 @@ def alfacoloring(coloring) -> str:
     mapping = {}
 
     stringcol = ""
-
     for x in coloring:
         if x not in mapping:
             mapping[x] = colorsleft.pop(0)
@@ -737,6 +738,62 @@ def table_print_colorings(height: int, alfas: list):
                 print("& ", end="")
         print("\\\\")
     pass
+
+def table_print_colorings_color(height: int, alfas: list, implying: list, reducer: list, stride=10):
+    colormap = {}
+    imply0map = {}
+    for col in implying[0]:
+        imply0map[col] = 1
+
+    for i in range(len(implying)):
+        iset = implying[i]
+        for color in iset:
+            colormap[color] = "g{:d}".format(i)
+    for col in reducer:
+        if col in colormap:
+            colormap[col] = "rg"
+        else:
+            colormap[col] = "rb"
+    print(colormap.values())
+    for i in range(height):
+        for j in range(i, len(alfas), height):
+            col = alfas[j]
+            cellcolor = "iv"
+            extra = ""
+            if col in colormap:
+                cellcolor = colormap[col]
+            else:
+                symmetries = symmetry_generator_ber(col)
+                for sym in symmetries:
+                    if sym in colormap:
+                        cellcolor = "sf"
+                        extra = "\\textcolor{white}" 
+
+            insertcol =  "\\underline{"+col+"}" if col in imply0map else col
+            print("\cellcolor{"+cellcolor+"}" + extra + "{"+insertcol+"}", end=" ")
+            if j+height < len(alfas):
+                print("& ", end="")
+        print("\\\\")
+        if (i+1) % stride == 0:
+            print("\\hline")
+    pass
+
+def alfadist(a: str, b: str):
+    count = 0
+    for i in range(len(a)):
+        if a[i] != b[i]:
+            count += 1
+    return count
+
+def ring_alfaneighbors(n: int):
+    alfas = ring_alfacolorings(n)
+    pairs = []
+    for a in alfas:
+        for b in alfas:
+            if alfadist(a, b) == 1:
+                pairs.append(a + " " + b)
+    return pairs
+            
 
 # D-reduce all configurations within the range of specified sizes
 def d_reduce_all(configs, ring_size_lower=6, ring_size_upper=16):
@@ -778,23 +835,151 @@ def d_reduce_all(configs, ring_size_lower=6, ring_size_upper=16):
             if configs[j].ring_size > ring_size:
                 config_tracker = j
                 break
-            r = check_reducible(configs[j], colorings, groupings)
+            implyingsets = []
+            r = check_reducible(configs[j], colorings, groupings, implyingsets)
             results[configs[j].identifier] = r
+            results["#{:d}".format(configs[j].identifier)] = implyingsets
     return results
 
+def alfa_to_number(alfa: str):
+    numbers = []
+    map = { "a": 1, "b": 2, "c": 3, "d":4 }
+    for i in range(len(alfa)):
+        numbers.append(map[alfa[i]])
+    return numbers
+
+def line5_reducer_test(ber: list):
+    # input is the implying sets of the bernhard diamond (confg 2).
+    colors = [ 1, 2, 3, 4 ]
+
+    valid_bercolors = {}
+    for iset in ber:
+        for col in iset:
+            valid_bercolors[col] = 1
+    
+    possible_l5_colors = {}
+
+    for i1 in colors:
+        for i2 in colors:
+            for i3 in colors:
+                for i4 in colors:
+                    for i5 in colors:
+                        coloring = ( i1, i2, i3, i4, i5 )
+
+                        valid = True
+                        for i in range(4):
+                            if coloring[i] == coloring[i+1]:
+                                valid = False
+                                break
+                        if valid:
+                            alfa = alfacoloring(coloring)
+                            possible_l5_colors[alfa] = 1
+
+    sortedlist = list(possible_l5_colors.keys())
+    sortedlist.sort()
+    bercolorings = {}
+    for col in sortedlist:
+        num = alfa_to_number(col)
+        bercol = [ num[2], num[3], num[4], num[3], num[2], num[1], num[0], num[1] ]
+        alfaber = alfacoloring(bercol)
+        bercolorings[alfaber] = 1
+
+    final = list(bercolorings.keys())
+    final.sort()
+    print("A total of {:d} bercolorings from reducer".format(len(final)))
+    for col in final:
+        print(col, "{:s}".format("Extends" if col in valid_bercolors else ""))
+
+def color_permuter(col: str, key: str):
+    newstr = ""
+    for i in range(len(col)):
+        char = key[i]
+        index = int(char)
+        newstr += col[index]
+    return newstr
+
+def symmetry_generator_ber(col: str):
+    return [
+        color_permuter(col, "43210765"),
+        color_permuter(col, "07654321")
+    ]
+
+def eye_reducer_test(ber: list):
+    ring8 = ring_alfacolorings(8)
+
+    # input is the implying sets of the bernhard diamond (confg 2).
+    colors = [ 1, 2, 3, 4 ]
+
+
+    implycolors = {}
+    valid_bercolors = {}
+    for i in range(len(ber)):
+        iset = ber[i]
+        for col in iset:
+            valid_bercolors[col] = 1
+            implycolors[col] = i
+    
+    reducer_colors = []
+
+    for y0 in colors:
+        for y1 in colors:
+            for y2 in colors:
+                for y3 in colors:
+                    for y4 in colors:
+                        for y5 in colors:
+                            valid = \
+                                y0 != y1 and \
+                                y1 != y2 and \
+                                y1 != y3 and \
+                                y3 != y4 and \
+                                y4 != y5 and \
+                                y4 != y0 and \
+                                y1 != y4  
+                            if valid:
+                                coloring = (y0,y1,y2,y3,y4,y5)
+                                reducer_colors.append(coloring)
+
+    bercolorings = set()
+    for num in reducer_colors:
+        bercol = [
+                num[0], 
+                num[1], 
+                num[2], 
+                num[1], 
+                num[3], 
+                num[4], 
+                num[5], 
+                num[4] ]
+        alfaber = alfacoloring(bercol)
+        bercolorings.add(alfaber)
+
+    final = list(bercolorings)
+    final.sort()
+    print("A total of {:d} bercolorings from reducer".format(len(final)))
+    for i in range(len(final)):
+        col = final[i]
+        print(i+1, col, "{:s}".format("p{:d}".format(implycolors[col]) if col in implycolors else ""))
+    table_print_colorings_color(46, ring_alfacolorings(8), ber, final)
 
 # Doing the stuffs
 ########################################################################################################################
 
-graphs, configs = import_graphs()     # Get configs from file
+graphs, configs = import_graphs("my.conf")     # Get configs from file
 
-table_print_colorings(8, ring_alfacolorings(6))
+#table_print_colorings(46, ring_alfacolorings(8))
 
-#results = d_reduce_all(configs, 6,6)
+# print(len(ring_alfacolorings(5)))
+# pairs = ring_alfaneighbors(5)
+# for p in pairs:
+#     print(p)
+
+#print(symmetry_generator_ber("12345678"))
+results = d_reduce_all(configs, 6,8)
+eye_reducer_test(results["#2"])
+
 #USE_FAST_SWITCH = False
 #timed_reducibility_check(configs, 6, 6)
 #timed_reducibility_check(configs, 10, 10)
 #USE_FAST_SWITCH = True
 # timed_reducibility_check(configs, 6, 6)
 #timed_reducibility_check(configs, 10, 10)
-

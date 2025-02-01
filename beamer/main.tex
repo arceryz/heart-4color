@@ -1,0 +1,120 @@
+\documentclass{beamer}
+
+\usepackage{parskip}
+\usepackage{colortbl}
+\usepackage{soul}
+\usepackage{ifthen}
+\usepackage[makeroom]{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage{listofitems}
+\usepackage{xstring}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{external}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.markings}
+
+\usepackage{arydshln}
+\setlength{\dashlinedash}{2pt}  % Finer dashes
+\setlength{\dashlinegap}{2pt}     % Smaller gaps
+
+\usetheme{boadilla}
+\newcommand{\maxi}[1]{\overline{\Phi}(#1)}
+\newcommand{\bir}{\text{Bir}\Diamond}
+\newcommand{\ber}{\text{Ber}\Diamond}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand{\chain}[3]{#1 \stackrel{#3}{\frown} #2 }
+\newcommand{\confg}{\mathcal{C}}
+\newcommand{\core}{\mathcal{K}}
+\newcommand{\I}{\text{I}}
+\newcommand{\II}{\text{II}}
+\newcommand{\compat}{\implies}
+\newcommand{\ncompat}[1]{\stackrel{#1}{\compat}}
+\newcommand{\digitToNum}[1]{\the\numexpr#1\relax}
+\newcommand{\scheme}[2]{
+    \readlist*\mylist{#2}
+     \tikz[baseline]{ 
+        \foreach \x [count=\i] in {#1} {
+            \coordinate (\i) at (0.3*\i, 0.225); \node[text height=0mm] at (0.3*\i,0) {$\x$};
+        } 
+        \foreachitem \z \in \mylist {
+            \StrChar{\z}{1}[\left]
+            \StrChar{\z}{2}[\right]
+            \StrChar{\z}{3}[\color]
+            \StrChar{\z}{4}[\cross]
+            \path (\left) edge[bend left=45] node[above, yshift=-2]{\small 
+            \ifthenelse{\equal{\cross}{-}}{$\cancel{\color}$}{$\color$}
+            } (\right);
+        }
+    }
+} 
+\definecolor{g0}{RGB}{58, 255, 36}
+\definecolor{g1}{RGB}{58, 255, 36}
+\definecolor{g2}{RGB}{58, 255, 36}
+\definecolor{g3}{RGB}{58, 255, 36}
+\definecolor{g4}{RGB}{58, 255, 36}
+\definecolor{g5}{RGB}{58, 255, 36}
+\definecolor{iv}{RGB}{ 255, 255, 255 }
+\definecolor{rg}{RGB}{ 70, 120, 255 }
+\definecolor{rb}{RGB}{ 255, 36, 36 }
+\definecolor{sf}{RGB}{ 0, 0, 0 }
+
+%Information to be included in the title page:
+\title{Heart of the Four Color Theorem}
+\subtitle{\small REDUCIBILITY\vspace{-0.5cm}}
+\author{Timothy van der Valk\vspace{0.5cm}}
+\date{}
+\titlegraphic{
+    \vspace{-2cm}
+    \includegraphics[width=0.5\textwidth]{../paper/birkhoff_heart.pdf}
+}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\input{parts/delft/delft.tex}
+
+\begin{frame}
+\frametitle{Contents}
+\tableofcontents
+\end{frame}
+
+\section{Part 1}
+\input{parts/graphcoloring/graphcoloring.tex}
+\input{parts/rings/rings.tex}
+\begin{frame}
+    \includegraphics[width=\textwidth]{images/break1.png}
+    We will be back in 5 minutes.
+\end{frame}
+
+\section{Part 2}
+\include{parts/ring45/ring45}
+\begin{frame}
+    \includegraphics[width=\textwidth]{images/break2.jpg}
+    We will be back in 5 minutes.
+\end{frame}
+
+\section{Part 3}
+\include{parts/dreduce/dreduce.tex}
+\include{parts/creduce/creduce.tex}
+\section{Conclusion}
+\include{parts/conclusion}
+
+\end{document}

@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage{parskip}
+\usepackage{colortbl}
+\usepackage{soul}
+\usepackage{ifthen}
+\usepackage[makeroom]{cancel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage{listofitems}
+\usepackage{xstring}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{external}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.markings}
+
+\usepackage{arydshln}
+\setlength{\dashlinedash}{2pt}  % Finer dashes
+\setlength{\dashlinegap}{2pt}     % Smaller gaps
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\preto{\theorem}{\needspace{2cm}}
+\preto{\lemma}{\needspace{3cm}}
+\preto{\section}{\needspace{10cm}}
+\preto{\subsection}{\needspace{8cm}}
+\preto{\definition}{\needspace{3cm}}
+
+\title{\vspace{-2cm}\includegraphics[scale=0.6]{birkhoff_heart.pdf}\\\vspace{0.5cm} Heart of the Four Color Theorem}
+\author{Timothy van der Valk}
+\date{January 2025, Tohoku University}
+
+\definecolor{g0}{RGB}{58, 255, 36}
+\definecolor{g1}{RGB}{58, 255, 36}
+\definecolor{g2}{RGB}{58, 255, 36}
+\definecolor{g3}{RGB}{58, 255, 36}
+\definecolor{g4}{RGB}{58, 255, 36}
+\definecolor{g5}{RGB}{58, 255, 36}
+\definecolor{iv}{RGB}{ 255, 255, 255 }
+\definecolor{rg}{RGB}{ 70, 120, 255 }
+\definecolor{rb}{RGB}{ 255, 36, 36 }
+\definecolor{sf}{RGB}{ 0, 0, 0 }
+
+\newcommand{\maxi}[1]{\overline{\Phi}(#1)}
+\newcommand{\bir}{\text{Bir}\Diamond}
+\newcommand{\ber}{\text{Ber}\Diamond}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand{\chain}[3]{#1 \stackrel{#3}{\frown} #2 }
+\newcommand{\confg}{\mathcal{C}}
+\newcommand{\core}{\mathcal{K}}
+\newcommand{\I}{\text{I}}
+\newcommand{\II}{\text{II}}
+\newcommand{\compat}{\implies}
+\newcommand{\ncompat}[1]{\stackrel{#1}{\compat}}
+\newcommand{\digitToNum}[1]{\the\numexpr#1\relax}
+\newcommand{\scheme}[2]{
+    \readlist*\mylist{#2}
+     \tikz[baseline]{ 
+        \foreach \x [count=\i] in {#1} {
+            \coordinate (\i) at (0.3*\i, 0.225); \node[text height=0mm] at (0.3*\i,0) {$\x$};
+        } 
+        \foreachitem \z \in \mylist {
+            \StrChar{\z}{1}[\left]
+            \StrChar{\z}{2}[\right]
+            \StrChar{\z}{3}[\color]
+            \StrChar{\z}{4}[\cross]
+            \path (\left) edge[bend left=45] node[above, yshift=-2]{\small 
+            \ifthenelse{\equal{\cross}{-}}{$\cancel{\color}$}{$\color$}
+            } (\right);
+        }
+    }
+} 
+
+\begin{document}
+
+\maketitle
+
+The four color theorem is a famous result from graph theory that has resisted proof for well over a 100 years. An application of this theorem states that any world map can be colored with four colors in such a way, that two neighboring regions receive different colors. When tasked with coloring a map, the solution lies in the idea of breaking the map into smaller pieces that are easy to color. This idea is called \textit{reducibility}. This paper gives a more intuitive explanation of the three forms of reducibility used in the proof of the four color theorem. 
+
+We have explained how maps with regions arranged in a \textit{ring} can broken up into smaller maps. This idea was first introduced by Birkhoff in 1913 \cite{birkhoff}. We have rewritten his proofs for the reducing of rings of 4 and 5 regions. For rings of 6 regions and above, we have introduced D-reducibility with the Birkhoff Diamond as example. This is where the use of Kempe-chains is streamlined. We improved upon the problems of D-reducibility by introducing C-reducibility with the Bernhart Diamond as example. This form uses reducers to avoid bad colorings of the configuration. 
+
+We built up all this theory by leaning on the five color theorem for inspiration. We have put the problem of proving the four color theorem in perspective of several simple concepts, such that the intuition behind the proof as a whole can be better understood. Many figures and examples have been given to this end.
+\vspace{0.1cm}\\
+{ \tiny Title image - The Birkhoff diamond shaped like a heart (original). }
+
+\pagebreak
+
+\pagebreak
+\input{parts/summary.tex}
+
+\tableofcontents
+
+\pagebreak
+\input{parts/introduction/introduction.tex}
+\input{parts/ringreduce/ringreduce.tex}
+\input{parts/dreduce/dreduce.tex}
+\input{parts/creduce/creduce.tex}
+\input{parts/conclusion.tex}
+
+\pagebreak
+\printbibliography
+
+\end{document}

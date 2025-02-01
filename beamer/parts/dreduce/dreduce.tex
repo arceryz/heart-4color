@@ -1,0 +1,214 @@
+\subsection{D-reducibility}
+
+\begin{frame}
+    \frametitle{The Birkhoff Diamond}
+
+    \begin{figure}[!h]
+        \centering
+        \begin{tikzpicture}[scale=1.5, mid arrow/.style={
+            postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l1) at (-2, 0) { };
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l2) at (-1, 1) { };
+            \node[circle, fill, scale=0.015cm] (l3) at (-1, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l4) at (-1, -1) {};
+    
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r1) at (2, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r2) at (1, 1) {};
+            \node[circle, fill, scale=0.015cm] (r3) at (1, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r4) at (1, -1) {};
+    
+            \node[circle, fill, scale=0.015cm] (c1) at (0, 0.5) {};
+            \node[circle, fill, scale=0.015cm] (c2) at (0, -0.5) {};
+            \node (core) at (-0.65, 0.45) { $\core$ };
+            \node (ring) at (-1.7, 0.7) { $R_6$ };
+    
+            \draw[opacity=0.2] (l1) -- (l2) -- (r2) -- (r1) -- (r4) -- (l4);
+            \draw [mid arrow, opacity=0.3] (l1) -- (l4);
+            \draw[opacity=0.2] (l1) -- (l3);
+            \draw[opacity=0.2] (l2) -- (l3) -- (l4);
+            \draw[opacity=0.2] (l2) -- (c1);
+            \draw (c1) -- (l3) -- (c2);
+            \draw[opacity=0.2] (c2) -- (l4);
+            \draw (c1) -- (c2);
+            \draw[opacity=0.2] (r2) -- (c1);
+            \draw (c1) -- (r3) -- (c2);
+            \draw[opacity=0.2] (c2) -- (r4);
+            \draw[opacity=0.2] (r2) -- (r3) -- (r4);
+            \draw[opacity=0.2] (r1) -- (r3);
+        \end{tikzpicture}
+        \caption{The Birkhoff Diamond ($bir$).}
+    \end{figure}
+
+    The degrees of vertices in the core $\core$ fully determines the ring around it.
+
+\uncover<2->{
+\begin{equation*}
+    \begin{matrix}
+    \bullet &\quad \longrightarrow \quad &\deg(v)=5 \\
+    \cdot &\quad \longrightarrow \quad & \deg(v)=6 \\
+    \circ &\quad \longrightarrow \quad & \deg(v)=7 \\
+    \square &\quad \longrightarrow \quad  & \deg(v)=8 \\
+    \end{matrix}
+\end{equation*}
+}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Birkhoff Diamond}
+    \begin{figure}[!ht]
+        \centering
+        \begin{tabular}{ cccc }
+            $\Phi(6) $ & \\
+            \hline
+            ababab & abacbd & abcadc &  \cellcolor{g0} abcdab \\
+            \cellcolor{g0} ababac &  \cellcolor{g0} abacdb &  \cellcolor{g0} abcbab & abcdac \\
+            \cellcolor{g0} ababcb &  \cellcolor{g0} abacdc &  \cellcolor{g0} abcbac & abcdad \\
+            ababcd & abcabc &  \cellcolor{g0} abcbad & abcdbc \\
+            abacab & abcabd & abcbcb & abcdbd \\
+            \cellcolor{g0} abacac &  \cellcolor{g0} abcacb &  \cellcolor{g0} abcbcd &  \cellcolor{g0} abcdcb \\
+            abacad &  \cellcolor{g0} abcacd & abcbdb &  \cellcolor{g0} abcdcd \\
+            \cellcolor{g0} abacbc &  \cellcolor{g0} abcadb & abcbdc \\
+            \hline
+            31 & \\
+        \end{tabular}
+        \caption{All unique ring colorings of $R_6$. The colorings of $\Phi(\bir)$ in green. }
+        \label{table:colsring6}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implied colorings}
+    
+    Consider a chain $\chain{v_4}{v_6}{bd}$ in $ababab$.
+\begin{equation}
+    \begin{aligned}
+    \scheme{a,b,a,b,a,b}{46d} &\compat \colorbox{g0}{ababcb}\\
+    \scheme{a,b,a,b,a,b}{46d-} &\compat ababad = \colorbox{g0}{ababac}.
+    \end{aligned}
+\end{equation}
+
+    \uncover<2->{
+        Therefore, the coloring $ababab$ implies the set 
+        \begin{equation}
+            ababab \compat \{ ababcb, \; ababac \} \subset \Phi(\bir).
+        \end{equation}
+
+        We say that $ababab$ is a \textit{fixable} ring coloring of $\bir$.
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implied colorings}
+
+    \begin{definition}
+        A coloring $x$ implies a set of colorings $\II$ if every scheme $x^\star$ of $x$ implies a coloring $y \in \II$. Write $x \compat \II$.
+    \end{definition}
+    
+    \begin{definition}<2->
+        A set of colorings $\I$ implies $\II$ if every $x \in \I$ implies $\II$. Write $\I \implies \II$.
+    \end{definition}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implied colorings}
+    \begin{equation}
+        \Phi_5(\bir) \compat \Phi_4(\bir) \compat \Phi_3(\bir) \compat \ldots \compat \Phi_0(\bir).
+    \end{equation}
+    \begin{definition}<2->
+        A set of colorings $\I$ $n$-implies a set $\II$ if there exist sets $B_i$ for $0 < i < n$ such that $I \compat B_{n-1}$, $B_i \compat B_{i-1}$ and $B_1 \compat \II$. We write $\I \ncompat{n} \II$.
+    \end{definition}
+
+    \begin{example}<3->
+        \begin{equation}
+            \Phi_5(\bir) \ncompat{5} \phi_0(\bir)
+        \end{equation}
+    \end{example}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implied colorings}
+
+    \begin{figure}[!ht]
+        \centering
+        \begin{tabular}{ ccccccc }
+            $\Phi_0(\bir) $ & & $\Phi_1$ & $\Phi_2$ & $\Phi_3$ & $\Phi_4$ & $\Phi_5$ \\
+            \hline
+            ababac & abcadb & ababab & abacad & abacbd & abcabd & abcabc \\
+            ababcb & abcbab & ababcd & abcbdb & abcbdc & abcadc & \\
+            abacac & abcbac & abacab &        & abcdac & abcdbc & \\
+            abacbc & abcbad & abcbcb &        & abcdbd &        & \\
+            abacdb & abcbcd & abcdad &        &        &        & \\
+            abacdc & abcdab \\
+            abcacb & abcdcb \\
+            abcacd & abcdcd \\
+            \hline
+            16 & & 5 & 2 & 4 & 3 & 1 \\
+        \end{tabular}
+        \caption{ All $n$-implying sets of $\bir$. Together a total of 31 colorings. Only differences are shown. }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{D-reducibility}
+
+    \begin{definition}
+        The \emph{max-implying} set $\overline{\Phi}(\confg)$ of a configuration $\confg$ is the largest $n$-implying set  $\Phi_n(\confg)$.
+    \end{definition}
+    
+    \begin{definition}<2->
+        A configuration $\confg$ on $R_n$ is D-reducible if $\overline{\Phi}(\confg) = \Phi(n)$.
+    \end{definition}
+
+    
+    \uncover<3->{
+        \begin{example}
+            Because $\Phi_5(\bir) = \Phi(6)$, $\bir$ is D-reducible.
+        \end{example}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{D-reducibility}
+
+    \begin{figure}[!h]
+        \centering
+        \begin{tikzpicture}[scale=1.5, mid arrow/.style={
+            postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l1) at (-2, 0) { };
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l2) at (-1, 1) { };
+            \node[circle, fill, scale=0.015cm] (l3) at (-1, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (l4) at (-1, -1) {};
+    
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r1) at (2, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r2) at (1, 1) {};
+            \node[circle, fill, scale=0.015cm] (r3) at (1, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (r4) at (1, -1) {};
+    
+            \node[circle, fill, scale=0.015cm] (c1) at (0, 0.5) {};
+            \node[circle, fill, scale=0.015cm] (c2) at (0, -0.5) {};
+            \node (core) at (-0.65, 0.45) { $\core$ };
+            \node (ring) at (-1.7, 0.7) { $R_6$ };
+    
+            \draw[opacity=0.2] (l1) -- (l2) -- (r2) -- (r1) -- (r4) -- (l4);
+            \draw [mid arrow, opacity=0.3] (l1) -- (l4);
+            \draw[opacity=0.2] (l1) -- (l3);
+            \draw[opacity=0.2] (l2) -- (l3) -- (l4);
+            \draw[opacity=0.2] (l2) -- (c1);
+            \draw (c1) -- (l3) -- (c2);
+            \draw[opacity=0.2] (c2) -- (l4);
+            \draw (c1) -- (c2);
+            \draw[opacity=0.2] (r2) -- (c1);
+            \draw (c1) -- (r3) -- (c2);
+            \draw[opacity=0.2] (c2) -- (r4);
+            \draw[opacity=0.2] (r2) -- (r3) -- (r4);
+            \draw[opacity=0.2] (r1) -- (r3);
+        \end{tikzpicture}
+    \end{figure}
+
+    \uncover<2->{
+        What can we do if a ring coloring \textbf{can not} be fixed?
+    }
+\end{frame}

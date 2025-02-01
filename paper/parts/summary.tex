@@ -1,0 +1,18 @@
+\section*{Summary}
+\label{sec:summary}
+
+The four color theorem states that every map can be colored with four colors in such a way, that two neighboring regions receive different colors. Such a coloring is desired for a world map, because it becomes easy to tell two neighboring regions apart. It has been observed by many map makers that four colors suffice. The problem was first formulated by Francis Guthrie in 1852 while coloring the map of England. He brought the problem to his brother Frederick Guthrie, who in turn brought the problem to his mathematics lecturer Augustus De Morgan. 
+
+At the heart of the famous proof of the four color theorem by Appel and Haken in 1976 \cite{appel} is shown any map contains an arrangment of regions that can be removed and recolored later. These are called \textit{reducible configurations}. The four and five color theorem both used the theory of reducible configurations. There are three forms of reducibility of a configuration used in these proofs.
+
+\begin{enumerate}
+\item \textit{k-reducibility} shows that configurations with a boundary ring on less than 6 regions can be reduced. This is done by proving that the interior and exterior can be independently colored such that the colors on the bordering ring are the same. This justifies removing the configuration from the map and adding it back after coloring the smaller map.
+
+\item \textit{D-reducibility} builds upon $k$-reducibility for configurations on rings of 6 regions and more. This technique proves reducibility for individual configurations. It shows that every coloring on the border can be reconfigured to match the interior of the configuration, through the use of \textit{Kempe-chains}. The Birkhoff Diamond is used as an example.
+
+\item \textit{C-reducibility} improves upon D-reducibility in case that not all ring colorings can be reconfigured. It avoids those bad colorings by replacing the configuration with a smaller map called a \textit{reducer}. The ring colorings of this reducer can be reverted to a ring coloring of the original configuration. These reverted colorings avoid the bad colorings of the original configuration. C-reducibility is introduced with the Bernhart Diamond as example.
+\end{enumerate}
+
+The Bernhart Diamond is shown to be C-reducible with a reducer. However, two of its reducer-generated colorings are not reconfigurable. This turns out to be a flaw in either D-reducibility, or the implementation of D-reducibility by John. P. Steinberger \cite{johnp}. These two colorings depend on another problem coloring called a \textit{symmetry fault}. A symmetry fault is a coloring that is not reconfigurable, but whose symmetry is. Therefore it must be reconfigurable as well. We have not uncovered the cause of these faults, but Bernhart \cite{bernhart} noticed them as well in 1947.
+
+The first proof of the four color theorem had a set of 1478 configurations to check. An improvement was made by Neil Robertson et al. \cite{thomas} in 1996 who reduced the set to only 633 configurations that are either C or D-reducible. Lastly, an improvement was made by John P. Steinberger in 2009 who used only D-reducibility at the cost of having to check 2822 configurations. It seems that using more advanced forms of reducibility reduces the amount of configurations on ring 6 and above. This hints that there might be an all-encompassing form of reducibility that uses the least number of configurations, which would be \textit{The Heart of the Four Color Theorem}.

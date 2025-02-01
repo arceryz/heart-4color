@@ -1,0 +1,103 @@
+We have seen in the proof of the five color theorem that a vertex surrounded by five or less neighbors can always be colored using one of five colors, even if all of its neighbors initially use all five colors. If we have only four colors available, we will find that it is no longer guaranteed that we can free a color. This is what Alfred Kempe tried to do when he gave the first false proof of the four color theorem.
+
+If we look at the key idea, we see that if one half of a graph is isolated from another half by a group of boundary vertices, we can color this isolated part regardless of the colors on the boundary. Naturally, the fundamental shape that seperates a graph in two halves is a \textit{ring} (or a line if it is not cyclic).
+
+\begin{definition}
+    A \emph{ring} of $n$ vertices $R_n$ in a planar graph $G$ is an induced cycle of $G$.
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}
+        \node[circle, fill, scale=0.015cm] (l1) at (-1, -1) { };
+            \node[circle, fill, scale=0.015cm] (l2) at (-1, 1) { };
+            \node[circle, fill, scale=0.015cm] (l3) at (1, 1) {};
+            \node[circle, fill, scale=0.015cm] (l4) at (1, -1) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (m1) at (0, 0.5) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (m2) at (-0.3, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (m3) at (0.3, 0) {};
+            \node[circle, fill, scale=0.015cm, opacity=0.2] (m4) at (0, -0.5) {};
+
+            \draw (l1) -- (l2) -- (l3) -- (l4) -- (l1);
+            \draw[opacity=0.2] (m1) -- (m2) -- (m4) -- (m3) -- (m1);
+            \draw[opacity=0.2] (m2) -- (m3);
+            \draw[opacity=0.2] (m1) -- (l2);
+            \draw[opacity=0.2] (m1) -- (l3);
+            \draw[opacity=0.2] (m2) -- (l1);
+            \draw[opacity=0.2] (m2) -- (l2);
+            \draw[opacity=0.2] (m3) -- (l3);
+            \draw[opacity=0.2] (m3) -- (l4);
+            \draw[opacity=0.2] (m4) -- (l1);
+            \draw[opacity=0.2] (m4) -- (l4);
+    \end{tikzpicture}
+    \hspace{1cm}
+    \begin{tikzpicture}[scale=1.13]
+        \node[circle, fill, scale=0.015cm, opacity=0.2] (c) at (0, 0) {};
+
+
+        \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
+        \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
+        \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
+        \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
+        \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
+
+        \draw[opacity=0.2] (c) -- (l1);
+        \draw[opacity=0.2] (c) -- (l2);
+        \draw[opacity=0.2] (c) -- (l3);
+        \draw[opacity=0.2] (c) -- (l4);
+        \draw[opacity=0.2] (c) -- (l5);
+        \draw (l1) -- (l2) -- (l3) -- (l4) -- (l5) -- (l1);
+        \draw (l1) .. controls +(2,0) and +(1,0) .. (l3);
+    \end{tikzpicture}
+    \caption{An example of the ring $R_4$ surrounding a graph on four vertices (left). An example of an invalid ring $R_5$ (right). }
+    \label{fig:ring}
+\end{figure}
+
+We will frequently need all the possible colorings for a ring $R$ contained in a certain planar graph $G$. We will give a name to the set of such colorings. The first thing we might do with rings is see if they themselves are reducible. In fact, we will find a common result from literature.
+
+
+\begin{definition}
+    The set of all \emph{valid} 4-colorings of a ring $R$ in a planar graph $G$ is given by $\Phi(R \subset G)$ or $\Phi(G)$ if $R$ is clear from the context. 
+\end{definition}
+\begin{definition}
+    The set of all valid ring colorings of $R_n$ is given by $\Phi(n) = \Phi(R_n)$.
+\end{definition}
+
+\begin{theorem}
+    \label{thm:ringsarered}
+    The ring $R_n$ with $n\geq 4$ is reducible in every planar graph $G$.
+\end{theorem}
+
+\begin{proof}
+Let $R_n$ be contained in $G$. Since the interior of $R_n$ is empty and $n\geq4$, we may contract the two non-neighboring ring vertices $v_1, v_3$ to a new vertex $u$. As a result, we obtain the graph $G'$ on one less vertex. See Figure \ref{fig:ringcontract}.
+
+Given a 4-coloring of $G'$. Because $R_n$ is a ring, there will be no edges between the ring vertices $v_1$ and $v_3$. Therefore, we may give $v_1$ and $v_3$ the same color as $u$ without issue. Let the other vertices of $G$ be given the same color as their $G'$ counterparts. Then we have obtained a 4-coloring of $G$.
+
+\end{proof}
+
+\needspace{4cm}
+\begin{figure}[!h]
+    \centering
+    \begin{tikzpicture}[scale=0.7]
+        \node (l1) at (-1, -1) { $a$ };
+        \node (l2) at (-1, 1) { $b$ };
+        \node (l3) at (1, 1) { $c$ };
+        \node (l4) at (1, -1) { $b$ };
+
+        \draw (l1) -- (l2) -- (l3) -- (l4) -- (l1);
+        \node (impl) at (2.3, 0) { $\Longleftrightarrow$ };
+        \draw[dotted, thick] (l2) -- (l4);
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.7]
+        \node (l1) at (-1, -1) { $a$ };
+        \node[opacity=0.2] (l2) at (-1, 1) { $b$ };
+        \node (l3) at (1, 1) { $c$ };
+        \node[opacity=0.2] (l4) at (1, -1) { $b$ };
+        \node (c) at (0, 0) { $b$ };
+
+        \draw (l1) -- (c) -- (l3);
+        \draw[dotted, thick, opacity=0.2] (l2) -- (c) -- (l4);
+    \end{tikzpicture}
+    \caption{The ring $R_4$ being contracted to a smaller graph $G'$. The coloring of $G'$ can be reversed to a coloring of $G$.}
+    \label{fig:ringcontract}
+\end{figure}

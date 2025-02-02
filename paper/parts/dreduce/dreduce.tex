@@ -2,15 +2,13 @@
 \section{D-Reducibility}
 \label{sec:dreduce}
 
-We have seen that every configuration on $R_4$ is 0-reducible and on $R_5$ is 1-reducible. Naturally, we might try to examine the $k$-reducibility of $R_6$ and beyond. However, as we have seen in the increase in complexity for the 1-reducibility of $R_5$, this can be a tough problem. However, the difficulty of this problem lies in the fact the we try to prove the reducibility of \textit{all} configurations $\confg$ on $R_n$. 
-
-Individual configurations are much easier to examine. That is why a special theory was devised to analyse such indvidual configurations. Both D-reducibility and C-reducibility are a more refined form of the Kempe-chain arguments we gave for $k$-reducibility.
+We have seen the reducibility of configurations on $R_4$ and $R_5$. Naturally, we might try to investigate the reducibility of configurations on $R_6$ and beyond. However, as we have seen in the increase in complexity for the 1-reducibility on $R_5$, this will likely be a very tough problem. The difficulty of this problem lies in the fact the we try to prove the reducibility of many configurations on $R_n$ \textit{at once}. However, it is much easier to analyze individual configurations. This why special forms of reducibility were created to analyse such individual configurations. Among which D-reducibility, which is inspired by $k$-reducibility.
 
 \subsection{Definition with the Birkhoff Diamond}
 
 We will be working with an example, the \textit{Birkhoff Diamond}  ($\text{Bir}\Diamond$), which is a configuration on $R_6$ with 4 vertices in the core. See Figure \ref{fig:diamond}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \begin{tikzpicture}[scale=1.5, mid arrow/.style={
         postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
@@ -58,7 +56,7 @@ An individual configuration on a ring is fully defined by its core $\core$ and t
     \end{matrix}
 \end{equation*}
 
-We will show that $\bir$ is 0-reducible. Since we know the graph of $\bir$, we can write down all the colorings it can have on the ring. This is the set $\Phi(\bir)$ of 16 colorings. We have highlighted all the ring colorings of $R_6$ and those of in this set in Figure \ref{table:colsring6}.
+We will show that $\bir$ is 0-reducible by a careful investigation of all the ring colorings of $\bir$ and $R_6$. Since we know exactly what the graph is of $\bir$, we can write down all its valid ring colorings. We have provided all the ring colorings of $R_6$ and $\Phi(\bir)$ in Figure \ref{table:colsring6}.
 
 \needspace{4cm}
 \begin{figure}[!ht]
@@ -81,7 +79,7 @@ We will show that $\bir$ is 0-reducible. Since we know the graph of $\bir$, we c
     \label{table:colsring6}
 \end{figure}
 
-To show that $\bir$ is 0-reducible, we must show that all those ring colorings that are not valid can be reconfigured using Kempe-chains to become valid. If we let $M+R_6$ be arbitrary, then we can expect any ring coloring of $R_6$. Let us consider the coloring $ababab$ for example. Suppose that $\chain{v_4}{v_6}{bd}$. This implies the following colorings.
+To show that $\bir$ is 0-reducible, we must show that all those invalid ring colorings can be fixed using Kempe-chains to become valid. If we let $M+R_6$ be arbitrary, then we can expect any ring coloring of $R_6$. Let us consider the coloring $ababab$ for example. Suppose that $\chain{v_4}{v_6}{bd}$. This implies the following colorings.
 
 \begin{equation}
     \begin{aligned}
@@ -90,41 +88,44 @@ To show that $\bir$ is 0-reducible, we must show that all those ring colorings t
     \end{aligned}
 \end{equation}
 
+Because the invalid coloring $ababab$ can be reconfigured into a valid coloring with only one Kempe-chain flip, we say that the coloring $ababab$ \textit{implies} the set of colorings
+
 \begin{equation}
     ababab \compat \{ ababcb, ababac \}.
 \end{equation}
 
-Therefore, the coloring $ababab$ can be reconfigured into a valid coloring with only one Kempe-chain flip. We say that the coloring $ababab$ \textit{implies} the set of those two colorings. 
-
 \begin{definition}
-    A coloring $x$ implies a set of colorings $\II$ if every scheme $x^\star$ of $x$ implies a coloring $y \in \II$. Write $x \compat \II$.
+    For a coloring $x$, we have $x \compat \II$ if for every scheme $x^\star$ of $x$, we have $x^\star \compat y \in \II$.
 \end{definition}
 
 \begin{definition}
-    A set of colorings $\I$ implies $\II$ if every $x \in \I$ implies $\II$. Write $\I \implies \II$.
+    For two set of colorings $\I$ and $\II$, we $\I \compat \II$ if for every $x \in \I$, we have $x \compat \II$. 
 \end{definition}
 
 The set of all colorings of $R_6$ that require one Kempe-chain flip to be reconfigured in the same way as $ababab$ is called the 1-implying set of $\bir$.
 
 \begin{equation}
-    \Phi_1(\bir) = \Phi_0(\bir)\; \cup \; \{ ababab, \;ababcd, \;abacab, \;abcbcb, \;abcdad \}.
+    \Phi_1(\bir) = \;\; \Phi_0(\bir)\; \cup \; \{ ababab, \;ababcd, \;abacab, \;abcbcb, \;abcdad \}.
 \end{equation}
 
-We write $\Phi_0(\bir) = \Phi(\bir)$. This set $\Phi_1(\bir)$ is the largest set that satisfies $\Phi_1(\bir) \compat \Phi(\bir)$. We may repeat what we did for $\Phi_1(\bir)$ to obtain sets of colorings that require 2, 3 and more chain flips to become a valid coloring. This is higher-order implication between sets of colorings, called \textit{n-implication}.
+This set is the largest that satisfies $\Phi_1(\bir) \compat \Phi_0(\bir) = \Phi(\bir)$.  We may repeat what we did for $\Phi_1(\bir)$ to obtain sets of colorings that require 2, 3 and more Kempe-chain flips to become a valid coloring. This higher-order implication between sets of colorings is called \textit{n-implication}.
 
 \begin{equation}
     \Phi_5(\bir) \compat \Phi_4(\bir) \compat \Phi_3(\bir) \compat \ldots \compat \Phi(\bir).
 \end{equation}
 
 \begin{definition}
-    A set of colorings $\I$ $n$-implies a set $\II$ if there exist sets $B_i$ for $0 < i < n$ such that $I \compat B_{n-1}$, $B_i \compat B_{i-1}$ and $B_1 \compat \II$. We write $\I \ncompat{n} \II$.
+    For two sets of colorings $\I$ and $\II$, we have $\I \ncompat{n} \II$ if there exist sets $B_i$ for $0 < i < n$ such that
+    \begin{equation}
+        I \compat B_{n-1}, \quad B_i \compat B_{i-1} \quad\text{and}\quad B_1 \compat \II.
+    \end{equation}
 \end{definition}
 
 \begin{definition}
     The $n$-implying set $\Phi_n(\confg)$ of a configuration $\confg$ is the largest set of ring colorings such that $\Phi_n(C) \ncompat{n} \Phi_0(\confg) = \Phi(\confg)$. 
 \end{definition}
 
-Therefore the set $\Phi_5(\bir)$, for example, satisfies $\Phi_5(\bir) \ncompat{5} \Phi_0(\bir)$. To continue with our example, let us find all the $n$-implying sets of $\bir$. In the case of the Birkhoff Diamond, this includes all ring colorings of $R_6$. Each coloring can reconfigured to become valid. This is precisely what is required for D-reducibility. We say that colorings that can be reconfigured to valid colorings are \textit{good} colorings. A single bad coloring is problematic for D-reducibility.
+The set $\Phi_5(\bir)$ satisfies $\Phi_5(\bir) \ncompat{5} \Phi_0(\bir)$. Let us find all the $n$-implying sets of $\bir$. We say that colorings in these sets are \textit{fixable}, because they can always be reconfigured to a valid coloring with Kempe-chains. For D-reducibility, we want all ring colorings to be fixable. All $n$-implying sets together must cover all ring colorings. This is precisely the case with the Birkhoff Diamond.
 
 \needspace{2cm}
 \begin{figure}[!ht]
@@ -143,12 +144,16 @@ Therefore the set $\Phi_5(\bir)$, for example, satisfies $\Phi_5(\bir) \ncompat{
         \hline
         16 & & 5 & 2 & 4 & 3 & 1 \\
     \end{tabular}
-    \caption{ All $n$-implying sets of $\bir$. Together a total of 31 colorings. }
+    \caption{ All $n$-implying sets of $\bir$. The largest covers all 31 ring colorings of $R_6$. }
     \label{table:diamondmap}
 \end{figure}
 
 \begin{definition}
     The \emph{max-implying} set $\overline{\Phi}(\confg)$ of a configuration $\confg$ is the largest $n$-implying set  $\Phi_n(\confg)$.
+\end{definition}
+
+\begin{definition}
+    A coloring $x \in \maxi{\confg}$ is called a \emph{fixable} ring coloring of $\confg$.
 \end{definition}
 
 \begin{definition}
@@ -167,5 +172,5 @@ Therefore the set $\Phi_5(\bir)$, for example, satisfies $\Phi_5(\bir) \ncompat{
         \node at (0, 1.35) { $\Phi(n) = \overline{\Phi}(C)$ };
     \end{tikzpicture}
 
-    \caption{The $n$-implying sets of $\confg$ are increasing in size. If they grow to the set of all ring colorings $\Phi(n)$, the configuration is D-reducible. }
+    \caption{Every ring coloring is fixable for a D-reducible configuration.}
 \end{figure}

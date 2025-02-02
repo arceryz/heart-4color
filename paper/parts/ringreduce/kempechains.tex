@@ -1,6 +1,6 @@
 \subsection{Kempe-chains}
 
-Drawing again inspiration from the proof of the five color theorem. We had essentially proven that the vertex with five neighbors is a 0-reducible configuration. The key weapon we used in this proof was the notion of \textit{chains}. Therefore, we will try using them to prove general $k$-reducibility as well by giving a proper definition.
+In the five color theorem we worked with a vertex that had 5 neighbors. We used chains of 2 colors between its neighbors to \textit{flip} the colors of these neighbors, creating a new coloring. If we return to the problem of finding a common ring coloring for a ring configuration $\confg$ on $R$ and the graph $M+R$, we do not know much of the ring colorings in $\Phi(M+R)$. All we know, are the guaranteed colorings from contracting the ring $R$. To obtain more guaranteed colorings, we can use the same trick of flipping the colors of vertices on the same chain. Therefore, let us define \textit{Kempe-chains}.
 
 \begin{definition}
     Let $G_{ab}(x)$ be the subgraph consisting of all the vertices colored $ab$ in the coloring $x$ of $G$.
@@ -61,14 +61,21 @@ Drawing again inspiration from the proof of the five color theorem. We had essen
     \label{fig:kempetut}
 \end{figure}
 
-As we have seen before, we can flip the colors of a chain $\kappa_{ab}(v)$ without breaking the current coloring. Imagine in your head how you can swap the chains in Figure \ref{fig:kempetut} for example. This key property of chains will allow us to obtain new ring colorings. 
+We can flip the colors of a chain $\kappa_{ab}(v)$ without breaking the current coloring. Imagine in your head how you can swap the chains in Figure \ref{fig:kempetut} for example. This is the trick to creating new guaranteed ring colorings in $\Phi(M+R)$.
 
-Judging only from the colors of a ring such as in $abcab$, we have no information on the chains that are present. This information is important because two vertices of the ring that belong to the same chain must be flipped together. To include this information in a ring coloring, Birkhoff devised the notion of a \textit{scheme}. He simply draws a line between two colors on the ring if they belong to the same Kempe-chain.
+Now, suppose that we are guaranteed that the coloring $abab$ is in $\Phi(M+R)$. If we want to flip any Kempe-chains on $abab$, then it is necessary to have information on them. This information is not obvious from the coloring $abab$ itself. To add this information, we  may consider two cases, one in which a chain is present, and another in which it is not. To visualise the Kempe-chains that are present on a coloring like $abab$, we may draw lines between vertices like
+
+\begin{equation}
+    \scheme{a,b,a,b}{13d}, \quad\quad \scheme{a,b,a,b}{24c}, \quad\quad \scheme{a,b,a,b}{13c-}.
+\end{equation}
+
+From this notation, it is visible at glance what the structure is of the ring coloring $abab$. A ring coloring together with knowledge of Kempe-chains we call a \textit{scheme}. In the left-most scheme for example, we see $\chain{v_1}{v_3}{ad}$. In the middle scheme, we see $\chain{v_2}{v_4}{bc}$ and in the right-most scheme, we see that $v_1$ and $v_3$ are not connected by an $ac$-chain.
 
 \begin{definition}
     Given a coloring $x$ of a planar graph $G$ and the colors on its ring $x(R)$. The \emph{scheme} on $R$ of $x$ consists of $x(R)$ with knowledge whether $u \in \kappa_{ab}(v)$ for two ring vertices $u,v \in R$ and colors $ab$.
 \end{definition}
-\begin{figure}[!ht]
+
+\begin{figure}[!h]
     \centering
     \begin{tikzpicture}[scale=1.0, mid arrow/.style={
         postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
@@ -97,21 +104,30 @@ Judging only from the colors of a ring such as in $abcab$, we have no informatio
         \end{matrix}$ };
         
     \end{tikzpicture}
-    \caption{Two ring schemes that are derived from a graph coloring. We only consider the chains on one side of the ring. The strikethrough $\cancel{d}$ indicates absence of a chain. Refer to the main.tex file \cite{github} for the \;\LaTeX\; source of this notation. }
+    \caption{Two ring schemes that are derived from a graph coloring. }
     \label{fig:schemes}
 \end{figure}
 
-A coloring can be treated as a scheme without information on chains. A scheme can be treated as a coloring. As such, we will use them interchangeably from now on. 
-
-Given the information of Kempe-chains on a coloring, we can start modifying the colors of the ring by flipping chains. We call any coloring that can be derived in this manner an \textit{implied coloring} of the scheme. 
+We will often make a case dinstinction on the Kempe-chains in the scheme of a ring coloring. We consider a case in which the scheme has the chain, and a case in which it has not. We rarely ever know \textit{all} the Kempe-chains of a scheme, but this is also never necessary. Given the information of just one Kempe-chain in a scheme, we can start \textit{reconfiguring} the colors of the ring by flipping Kempe-chains. This results in a new scheme with different ring colors. We say that one scheme \textit{implies} another scheme.
 
 \begin{definition}
-    Given two schemes $x$ and $y$. We say that $x$ implies $y$ if $x=y$ or $y$ can be obtained from $x$ by flipping a Kempe-chain. Write $x\compat y$.
+    Given two schemes $x$ and $y$. We say that $x \compat y$ if $x=y$ or $y$ can be obtained from $x$ by flipping a Kempe-chain.
 \end{definition}
 
-For example, the two schemes from Figure \ref{fig:schemes} have the following implications (change is highlighted). When we use Kempe-chains to change a color to another coloring, we say that the coloring is \textit{reconfigured}.
-
 \begin{equation*}
-    \scheme{a,b,c,a,b}{ 13a } \compat \scheme{a,b,c,a,\textbf{d}}{{13a}}, \quad \quad
-    \scheme{a,b,c,a,b}{ 25d- } \compat \scheme{a,\textbf{d},c,a,b}{{25d-}}.
+    \begin{aligned}
+    \circled{1}\quad\quad \scheme{a,b,c,a,b}{ 13a } &\compat \scheme{a,b,c,a,\textbf{d}}{{13a}}, \\
+    \circled{2}\quad\quad \scheme{a,b,c,a,b}{ 25d- } &\compat \scheme{a,d,c,a,\textbf{d}}{{25d-}},\\
+    \circled{3}\quad\quad \scheme{a,b,c,a,b}{ 13a } &\compat \scheme{\textbf{c},b,\textbf{a},\textbf{c},b}{{13a}}.
+    \end{aligned}
 \end{equation*}
+
+For the two schemes from Figure \ref{fig:schemes}, we have given two implied schemes above (change is highlighted). To deduce these implied colorings, we followed a few simple rules.
+
+\begin{enumerate}
+    \item The two vertices colored $b$ are seperated by the $ac$-chain $\kappa_{ac}(v_1)$. Therefore, the $bd$-chain $\kappa_{bd}(v_5)$ can not possibly connect with $v_2$. This results in only $v_5$ being recolored to $d$ if we flip this chain.
+    \item It is now directly given that $\kappa_{bd}(v_5)$ does not connect to $v_1$, therefore we may flip $v_5$ to $d$ in the same way as in the first case.
+    \item Now we know $v_1$ and $v_3$ are in the same $ac$-chain. Because $v_4$ neighbors $v_3$ on the ring, it will also be included in this chain. Since all three are on $\kappa_{ac}(v_1)$, flipping this chain results in all their colors to be flipped.
+\end{enumerate}
+
+Refer to these examples whenever a step of implying colorings in a proof is confusing. It will be a key concept for the remainder of the paper.

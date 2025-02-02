@@ -1,105 +1,38 @@
-\subsection{1-reducibility of the ring $R_5$}
+\subsection{Reducibility of configurations on $R_5$}
 
-In the five color theorem, we used that every planar graph has a vertex with $\deg(v)\leq 5$. So far, we know that the cases $\deg(v) \leq 4$ are reducible when using four colors. If $\deg(v)=5$, we may add edges between the neighbors of $v$ to obtain the ring $R_5$. If $R_5$ were 0-reducible, then we would obtain our reduction by removing the vertex $v$. Therefore, the four color theorem would follow in the same fashion as the five color theorem.
-
-Many have tried to show this, among which Alfred Kempe with his false proof. It must be hard (or require clever tricks) to prove that $R_5$ is 0-reducible. That is why Birhoff had proven in 1913 that $R_5$ is 1-reducible instead \cite{birkhoff}. So will we.
+Recall that every planar graph has a vertex with $\deg(v) \leq 5$. If we add edges between the neighbors of this vertex, then we obtain the rings $R_1$ thru $R_5$. We have seen the 0-reducibility of configurations on the first four. Therefore, if we could prove that every configuration on $R_5$ is 0-reducible, any planar graph would be reducible and the four color theorem would follow. Many people have tried to show this and failed, so let this serve as an warning as to why we should prove 1-reducibility instead.
 
 \begin{theorem}
-    The ring $R_5$ is 1-reducible.
+    A configuration $\confg$ on $R_5$ is 1-reducible in all planar graphs $M$ if it has a 3-coloring, or all planar graphs with $|M|>1$ if it does not.
 \end{theorem}
 
 \begin{proof}
-Let the planar graph $M+\confg$ with configuration $\confg=\core+R_5$ be arbitrary. Again, let the valid ring colorings be represented by
+We may consider a configuration with $|\confg| > 1$. Let the planar graph $M$ be arbitary. We will again use the convention of the sets $\I$ and $\II$ for the ring colorings.
 
 \begin{equation}
-    \I = \Phi(M+S) \quad \text{and} \quad \II = \Phi(\core+S').
+    \I = \Phi(M+S) \quad \text{and} \quad \II = \Phi(\confg).
 \end{equation}
 
-Since $k=1$, we have colorings from both $S=R_5$ and $S=R_5+v$ in the sets of possible colorings $\I, \II$. Whether or not we need the reducer depends totally on the arbitrary choice of $M+\confg$. This is as expected, since there are many configurations that are in fact, 0-reducible. Let us first consider the colorings contributed by the choice $S=R_5$, which means that we dont use a reducer.
-
-\begin{figure}[!ht] 
-    \centering
-    \begin{tikzpicture}[mid arrow/.style={
-        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
-        \draw[fill=white] (-0.5, 0) ellipse (2cm and 1.5cm);
-        \node (m) at (-1.7, 0) {$M$};
-        \node at (-0.8, 0.8) {$R_5$};
-
-        \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
-        \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
-        \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
-        \draw[mid arrow] (l1) -- (l2);
-        \draw (l2) -- (l3) -- (l4) -- (l5) -- (l1);
-    \end{tikzpicture}
-    \begin{tikzpicture}[mid arrow/.style={
-        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
-        \draw[opacity=0] (-0.5, 0) ellipse (2cm and 1.5cm);
-        \node at (-0.8, 0.8) {$R_5$};
-        \node[inner sep=1mm] (c) at (0, 0) {$\core$};
-        \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
-        \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
-        \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
-
-        \draw[opacity=0.2] (c) -- (l1);
-        \draw[opacity=0.2] (c) -- (l2);
-        \draw[opacity=0.2] (c) -- (l3);
-        \draw[opacity=0.2] (c) -- (l4);
-        \draw[opacity=0.2] (c) -- (l5);
-        \draw (l1) -- (l2) -- (l3) -- (l4) -- (l5) -- (l1);
-    \end{tikzpicture}
-    \caption{The reductions $M+R_5$ and $\core+R_5$ ($\confg$).}
-    \label{fig:ring5k0}
-\end{figure}
-
-Now we use the same trick as for the ring $R_4$. We may contract any two non-neighboring vertices of $R_5$ by Theorem \ref{thm:ringsarered}. This means that we get colorings of the form $a{*}{*}a{*}$ where the $a$-colored vertices got contracted. We dont know anything about the ${*}$-colors. Since there are 5 possible contractions of two vertices on $R_5$, we obtain 5 different colorings.
-
+The heart of this proof depends on a guaranteed 3-coloring in both $\I$ and $\II$. Because we may set our reducer $S=W_5$ (See Figure \ref{fig:reducertut}), we are guaranteed of the following colorings.
 \begin{equation}
-    \Phi^\star = \{ a{*}{*}a{*}, \quad {*}a{*}{*}a, \quad a{*}a{*}{*}, \quad {*}a{*}a{*}, \quad {*}{*}a{*}a{*} \}.
+    \Phi^\star(5) \;\subset\; \I, \II \quad\text{and}\quad \Phi^{W_5} \subset \I,\II.
 \end{equation}
 
-Next we consider the colorings for $S=R_5+v$. We may freely choose our reducers $S$ and $S'$ here. We will try to guarantee a 3-coloring because they are simplest to work with. It also turns out that they are key to finding a common ring coloring, as we shall see. For this reason, we use a single vertex connected to all ring vertices for our reducers $S$ and $S'$. 
-
-Note that the ${*}$-colorings from $\Phi^\star$ dont guarantee a 3-coloring. You can see how trying to prove 0-reducibility ($k=0$) requires you to work only with these colorings, and hence without a guarantee on any kind of coloring. A lot of cases will have to be evaluated.
+To justify that $\Phi^{W_5} \subset \II$ in case a 3-coloring is not given by $\confg$ from the start, let us add a single vertex $v$ to the configuration $\confg$ as illustrated in Figure \ref{fig:confg3col}. This results in the graph $\confg'$ on 1 more vertex. We may assume that $\confg'$ has a 4-coloring because $\confg' < M+\confg$ from our assumption that $|M| > 1$. In particular, $\confg'$ will have a 3-coloring on the ring from $W_5$. We may remove $v$ in this 3-coloring to obtain a 3-coloring of $\confg$. Therefore $\Phi^{W_5} \subset \Phi(\confg)$. 
 
 \needspace{5cm}
-\begin{figure}[!ht]
+\begin{figure}
     \centering
-    \begin{tikzpicture}[mid arrow/.style={
-        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
-        \draw[fill=white] (-0.5, 0) ellipse (2cm and 1.5cm);
-        \node (m) at (-1.7, 0) {$M$};
-        \node at (-0.8, 0.8) {$S$};
-
-        \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
-        \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
-        \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
-        \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
-        \node[circle, fill, scale=0.015cm] (e) at (0, 0) { };
-
-        \draw (e) -- (l1);
-        \draw (e) -- (l2);
-        \draw (e) -- (l3);
-        \draw (e) -- (l4);
-        \draw (e) -- (l5);
-        \draw (l1) -- (l2);
-        \draw (l2) -- (l3) -- (l4) -- (l5) -- (l1);
-    \end{tikzpicture}
-    \begin{tikzpicture}[mid arrow/.style={
-        postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
+    \begin{tikzpicture}
         \draw[opacity=0] (-0.5, 0) ellipse (2cm and 1.5cm);
-        \node[fill=white] at (1.2, 0.8) {$S'$};
+        \node[fill=white] at (1.2, 0.8) {$W_5$};
         \node[inner sep=1mm] (c) at (0, 0) {$\core$};
         \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
         \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
         \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
         \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
         \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
-        \node[circle, fill, scale=0.015cm] (e) at (-1.8, 0.1) { };
+        \node[circle, fill, scale=0.015cm, label=left:$v$] (e) at (-1.8, 0.1) { };
 
         \draw (e) .. controls +(0.2, 0.1) and + (-0.2, 0.0) .. (l5);
         \draw (e) .. controls +(0.3, -0.5) and +(-0.3,0) .. (l4);
@@ -113,34 +46,17 @@ Note that the ${*}$-colorings from $\Phi^\star$ dont guarantee a 3-coloring. You
         \draw[opacity=0.2] (c) -- (l4);
         \draw[opacity=0.2] (c) -- (l5);
         \draw (l1) -- (l2) -- (l3) -- (l4) -- (l5) -- (l1);
-    \end{tikzpicture}
-    \caption{The reductions $M+S$ and $\core+S'$ with $S=R_5+v$ for our specific choice of $S$ and $S'$.  }
-    \label{fig:ring5k1}
+    \end{tikzpicture}  
+    \caption{The modified configuration $\confg'$ used to guarantee a 3-coloring of $\confg$.}
+    \label{fig:confg3col}
 \end{figure}
 
-As expected, the only possible colorings of these reductions are 3-colorings like $\underline{c}abab$. There are five different 3-colorings of the ring $R_5$, we will be guaranteed of \textbf{only one} of them.
-
-\begin{equation}
-    \Phi^S = \{ 
-        \underline{c}abab\;\;\textbf{or}\;\; 
-        a\underline{c}bab\;\;\textbf{or}\;\;
-        ab\underline{c}ab\;\;\textbf{or}\;\;
-        aba\underline{c}b\;\;\textbf{or}\;\;
-        abab\underline{c} \}.
-\end{equation}
-
-Taking everything together, we obtain the following guarantee on colorings in $\I$ and $\II$.
-
-\begin{equation}
-    \Phi^\star\; \cup \;\Phi^S \;\subset\; \I, \II.
-\end{equation}
 
 A special property of 3-colorings on $R_5$ is that there will always be a single vertex colored uniquely, we call this the \textit{marked vertex}. This vertex acts as a kind of 'pivot' to tell if two 3-colorings are \textit{adjacent}. These two concepts are key to the proof.
 
 \begin{definition}
     The uniquely-colored vertex of a 3-coloring of $R_5$ is called the \emph{marked vertex}, indicated by an underline such as in $\underline{c}abab$.
 \end{definition}
-
 \begin{definition}
     Two 3-colorings of $R_5$ are called \emph{adjacent} if they have adjacent marked vertices, such as in $\underline{c}abab$ and $a\underline{c}bab$.
 \end{definition}
@@ -169,7 +85,7 @@ Therefore, we only need to consider the cases \circled{1} and \circled{2}. We wi
 \end{lemma}
 
 \begin{proof}
-Let two non-adjacent colorings $\I(\underline{c}abab)$ and $\II(ab\underline{c}ab)$ be given. Suppose that $v_3 \stackrel{bc}{\frown} v_5$ in $\II(ab\underline{c}ab)$. The two cases lead to the following.
+Let two non-adjacent colorings $\I(\underline{c}abab)$ and $\II(ab\underline{c}ab)$ be given. We make a case dinstinction whether the chain $v_3 \stackrel{bc}{\frown} v_5$ exists in $\II(ab\underline{c}ab)$ or not. 
 
 \begin{equation}
     \label{eq:abcab}
@@ -199,7 +115,7 @@ Therefore we obtain either a common coloring or an adjacent coloring. Note that 
 
 \begin{proof}
 
-Let two adjacent colorings $\I(\underline{c}abab)$ and $\II(a\underline{c}bab)$ be given. Suppose that $\chain{v_3}{v_5}{bd}$ in $\II(a\underline{c}bab)$. The two cases lead to the following.
+Let two adjacent colorings $\I(\underline{c}abab)$ and $\II(a\underline{c}bab)$ be given. We make a case dinstinction whether the chain $\chain{v_3}{v_5}{bd}$ exists in $\II(a\underline{c}bab)$ or not.
 
 \begin{equation}
     \label{eq:acdab}
@@ -220,7 +136,7 @@ we consider the coloring $\I(a{*}{*}a{*})$. We may again assume to have $\I(acda
     \end{matrix*}
 \end{equation*}
 
-If we do not obtain common colorings, we may repeat this procedure with $\II(a\underline{c}bab)$ and $\I(ac\underline{d}ac)$ to continously shift the marked vertex two to the right. The pattern that arises is illustrated in Figure \ref{table:ringpattern5} below.
+If we do not obtain common colorings, we may repeat this procedure with $\II(a\underline{c}bab)$ and $\I(ac\underline{d}ac)$ to continously shift the marked vertex two to the right. The pattern that arises is illustrated in Figure \ref{table:ringpattern5}.
 
 \begin{figure}[!ht]
     \centering

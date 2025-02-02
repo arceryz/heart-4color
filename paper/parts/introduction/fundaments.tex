@@ -1,8 +1,16 @@
 \subsection{Fundaments of the four color theorem}
 
-The proof of the four color theorem follows the same structure as the five color theorem. We show that every planar graph contains a subgraph that allows us to reduce the coloring problem to a smaller graph. This notion of a \textit{subgraph} of a graph requires some extra attention, since there are multiple ways to be a subgraph.
+The proof of the four color theorem follows the same structure as the five color theorem. We show that every planar graph contains a subgraph that allows us to reduce the coloring problem to a smaller graph. With \textit{smaller} we mean less vertices.
 
-Given a subgraph $\confg$ of a planar graph $G$. There are roughly two ways that $\confg$ can be a subgraph of $G$. See Figure \ref{fig:containtut}.
+\begin{definition}
+    The size $|G|$ of a graph is the number of vertices of $G$.
+\end{definition}
+
+\begin{definition}
+    A graph $H$ is smaller than $G$ or $H < G$ if $|H| < |G|$.
+\end{definition}
+
+This notion of a \textit{subgraph} of a graph requires some extra attention, since we will need a stronger notion of being a subgraph called \textit{containment}. See Figure \ref{fig:containtut}. The graphs $\confg$ contained in others that we use for reducibility purposes, are called \emph{configurations}.
 
 \begin{figure}[!ht]
     \centering
@@ -40,19 +48,20 @@ Given a subgraph $\confg$ of a planar graph $G$. There are roughly two ways that
         \draw[opacity=0.2] (e3) -- (l1);
         \draw[opacity=0.2] (l3) -- (e1) -- (e2) -- (e3) -- (l2);
     \end{tikzpicture}
-    \caption{A configuration contained in a graph (left). No containmnet (right).}
+    \caption{A configuration contained in a graph (left). No containment (right).}
     \label{fig:containtut}
 \end{figure}
 
 \begin{definition}
-    A planar graph $\confg$ is \emph{contained} in a graph $G$ if no vertices of $G$ are in the interior of $\confg$.
+    A planar graph $\confg$ is \emph{contained} in a graph $G$, if $G\setminus \confg$ (removed $\confg$) is connected.
 \end{definition}
 
 \begin{definition}
-    A planar graph $\confg$ is \emph{reducible} in a graph $G$ if $\confg$ being contained in $G$ implies that the 4-coloring of $G$ can be reduced to the 4-coloring of $G'$ with less vertices. $\confg$ is called a \emph{configuration}.
+    A planar graph $\confg$ is \emph{reducible} in a graph $G$, if $\confg$ being contained in $G$ implies that there exists graphs $H < G$ called \emph{reductions} whose 4-colorings can be used to 4-color $G$.
 \end{definition}
 
-Using these two definitions we can formulate the key theorem of the four color theorem. It simply states that every planar graph has a part that can be removed and recolored later, similar to how we did for the five color theorem.
+Therefore, in a reducibility proof, we may assume that any graph $H$ smaller than $G$ is 4-colorable. Then, we show that a 4-coloring of $H$ can be extended to a 4-coloring of $G$.
+Using these two definitions we can formulate the key theorem of the four color theorem. We proved the same result for the five color theorem.
 
 \begin{theorem}
     \label{funda1}
@@ -64,5 +73,7 @@ From this theorem, a 4-coloring of a planar graph $G_0$ can be found as follows.
 \begin{enumerate}
     \item Find a reducible configuration $C_n$ in $G_n$.
     \item Reduce the graph $G_n$ to the smaller graph $G_{n+1}$.
-    \item If $G_{n+1}$ is the empty graph, color all the intermediate graphs starting from $G_n$ all the way until $G_0$, else, repeat Step 1 on $G_{n+1}$.
+    \item If $G_{n+1}$ is the empty graph, color all the intermediate graphs starting from $G_n$ all the way until $G_0$. Else, repeat Step 1 on $G_{n+1}$.
 \end{enumerate}
+
+There are many ways to prove that a configuration is reducible. We will be treating the three central forms of reducibility that are used in the four color theorem. Each of them allows us to test the reducibility of certain configurations. These forms of reducibility are by no means perfect, each has its flaws and uses. A single, most general definition of reducibility is still not found. If such a single form would exist, then it would capture the heart of the four color problem.

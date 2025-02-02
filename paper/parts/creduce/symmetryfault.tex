@@ -13,7 +13,7 @@ If we come back to the red colorings from Figure \ref{table:bernhart}, they are 
     \end{aligned}
 \end{equation}
 
-It was proven in 1947 by Bernhart \cite{bernhart} that the colorings $R1$ and $R2$ are in fact fixable. This is because their fixability depends on the broken coloring $F1$ that should be fixable. This is one of the black colorings we call \textit{symmetry fault}. We have the following implications.
+It was proven in 1947 by Bernhart \cite{bernhart} that the colorings $R1$ and $R2$ are in fact fixable. This is because their fixability depends on the broken coloring $F1$ that should be fixable, this is one of the black colorings from Figure \ref{table:bernhart}. We have the following implications.
 
 \begin{equation}
     \begin{aligned}
@@ -31,12 +31,14 @@ Therefore, if $F1 \in \maxi{\ber}$ then $R1, R2 \in \maxi{\ber}$. The argument t
     \begin{tikzpicture}[scale=1.5, mid arrow/.style={
         postaction={ decorate, decoration={ markings, mark=at position 0.6 with { \arrow[black]{>>} } } } }]
         \node (l1) at (-2, 0) { $a$ };
-        \node (l2) at (-1, 1) { $c(d)$ };
+        \node (l2) at (-1, 1) { $c$ };
+        \node (l2m) at (-1, 1.2) { $d$ };
         \node[circle, fill, scale=0.015cm, opacity=0.2] (l3) at (-1, 0) {};
         \node (l4) at (-1, -1) { $b$ };
 
         \node (r1) at (2, 0) { $a$ };
-        \node (r2) at (1, 1) { $d(c)$ };
+        \node (r2) at (1, 1) { $d$ };
+        \node (r2m) at (1, 1.17) { $c$ };
         \node[circle, fill, scale=0.015cm, opacity=0.2] (r3) at (1, 0) {};
         \node (r4) at (1, -1) { $b$ };
 
@@ -63,7 +65,7 @@ Therefore, if $F1 \in \maxi{\ber}$ then $R1, R2 \in \maxi{\ber}$. The argument t
         \draw[opacity=0.2] (r2) -- (r3) -- (r4);
         \draw[opacity=0.2] (r1) -- (r3);
     \end{tikzpicture}
-    \caption{Horizontal symmetry of the colorings $abcbadbc \; (F1)$ and $abcbacbd \;(F1\star)$ in brackets. }
+    \caption{Horizontal symmetry of the colorings $abcbadbc \; (F1)$ and $abcbacbd \;(F1\star)$ above the other. }
     \label{fig:symfault}
 \end{figure}
 

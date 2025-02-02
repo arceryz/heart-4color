@@ -1,6 +1,6 @@
 We have seen in the proof of the five color theorem that a vertex surrounded by five or less neighbors can always be colored using one of five colors, even if all of its neighbors initially use all five colors. If we have only four colors available, we will find that it is no longer guaranteed that we can free a color. This is what Alfred Kempe tried to do when he gave the first false proof of the four color theorem.
 
-If we look at the key idea, we see that if one half of a graph is isolated from another half by a group of boundary vertices, we can color this isolated part regardless of the colors on the boundary. Naturally, the fundamental shape that seperates a graph in two halves is a \textit{ring} (or a line if it is not cyclic).
+If we look at the key idea, we see that if one half of a graph is isolated from another half by a group of boundary vertices, we can color this isolated part regardless of the colors on the boundary. Naturally, the fundamental shape that seperates a graph in two halves is a \textit{ring}.
 
 \begin{definition}
     A \emph{ring} of $n$ vertices $R_n$ in a planar graph $G$ is an induced cycle of $G$.
@@ -53,7 +53,7 @@ If we look at the key idea, we see that if one half of a graph is isolated from 
     \label{fig:ring}
 \end{figure}
 
-We will frequently need all the possible colorings for a ring $R$ contained in a certain planar graph $G$. We will give a name to the set of such colorings. The first thing we might do with rings is see if they themselves are reducible. In fact, we will find a common result from literature.
+The vertex of ring $R_1$ can not have a single edge to itself, instead, it acts as a bridge from one part of a graph to the other. For rings present in graphs, we are interested in which colorings are possible on them, called \textit{ring colorings}. The set of these colorings for a graph $G$ we shall define. It turns out that the rings $n\geq 4$ are already reducible configurations. Therefore, all future configurations will only contain triangles (the ring $R_3$), they will be \textit{triangulations}.
 
 
 \begin{definition}

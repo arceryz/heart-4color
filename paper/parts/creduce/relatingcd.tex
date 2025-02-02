@@ -1,0 +1,47 @@
+\subsection{Generalising D and $k$-reducibility}
+
+We have now seen all three forms of reducibility used in proofs of the four color theorem. You might have noticed many similarities between the different forms. For example, the key use of Kempe-chains, the reconfiguring of ring colorings and the use of reducers. Due to the way we built up this theory, we extended upon each of the shortcomings of one form to motivate the next. It might not come as a surprise then that C-reducibility is the most general of all forms.  Let us first consider the relation between D-reducibility and $k$-reducibility. 
+
+\begin{theorem}
+    D-reducibility implies 0-reducibility.
+\end{theorem}
+
+\begin{proof}
+Suppose that we have D-reducibility  $\confg$ on $R_n$. Clearly, we have that $\Phi(M+R_n) \subset \Phi(n) = \maxi{\confg}$. Therefore, every coloring of $\Phi(M+R_n)$ can be reconfigured to a coloring of $\Phi(\confg)$. This reconfiguring means that at least one coloring of $\Phi(\confg)$ must exist in $\Phi(M+R_n)$. Therefore
+
+\begin{equation}
+    \Phi(M+R_n) \;\; \cap \;\;\Phi(\confg) \quad \neq  \quad \varnothing.
+\end{equation}
+
+\end{proof}
+
+\begin{theorem}
+    C-reducibility with reducer $(R_n, \sigma_{id})$ is equivalent to D-reducibility.
+\end{theorem}
+
+\begin{proof}
+$\Longrightarrow$ Suppose that we have C-reducibility of $\confg$ with reducer $(R_n,\sigma_{id})$. Then 
+
+\begin{equation}
+    \Phi(R_n, \sigma_{id}) = \Phi(n) \subset \maxi{\confg} \quad \Longleftrightarrow \quad \Phi(n) = \maxi{\confg}.
+\end{equation}
+
+$\Longleftarrow$ Now suppose that we have D-reducibility. Then we may set $S=R_n$ and $\sigma=\sigma_{id}$ to obtain the same result as in the above equation.
+\end{proof}
+
+\begin{theorem}
+    C-reducibility $(S, \sigma_{id})$ on $R_n$ implies $k$-reducibility with $k = |S|-n$.
+\end{theorem}
+
+\begin{proof}
+Suppose that we C-reducibility of $\confg$ with $(S, \sigma_{id})$. Because $\Phi(M+ S) \subset \Phi(S, \sigma_{id}) \subset \maxi{\confg}$, at least some coloring of $\Phi(M+S)$ can be reconfigured to become valid. Therefore
+
+\begin{equation}
+    \Phi(M+S) \;\; \cap \Phi(\confg) \quad \neq \quad \varnothing.
+\end{equation}
+
+In addition, our reducer $S$ has $k = |S| - n$.
+
+\end{proof}
+
+Note, that there reverse direction of $k$-reducibility implying D and C-reducibility is also possible, but has some problems and technicalities that are not covered by the definitions. To go from $k$-reducibility to D-reducibility for example, one must show that every ring coloring is reconfigurable to $\Phi(\confg)$. With only the information that there is a common coloring in $\Phi(M+R)$ and $\Phi(\confg)$, it is only possible to guarantee this reconfigurability if the set $\Phi(M+R)$ contains only this one coloring and all its Kempe-chain reconfigurations. However, do there exist graphs whose colorings are all derived from a single one? It is not known.

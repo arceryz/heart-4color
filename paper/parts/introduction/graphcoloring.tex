@@ -60,12 +60,15 @@ The actual shape of the regions in our map is not of importance here. The key in
         \draw (m2) -- (m3) -- (m4) -- (m1);
         \draw[opacity=0.0] (v1) -- (v2) -- (v3) -- (v4) -- (v1);
     \end{tikzpicture}      
-    \caption{The translation of a map coloring to a graph coloring. In the last step we replace colors by the letters $a$,$b$,$c$ and $d$ for convenience. We obtain the coloring called $abcd$. graphs. }
+    \caption{The translation of a map coloring to a graph coloring. In the last step we replace colors by the letters $a$,$b$,$c$ and $d$ for convenience. We obtain the coloring called $abcd$ on a \textit{planar graph}. }
     \label{fig:colortut}
 \end{figure}
 
-From now on, we will leave the notion of maps and regions behind us and work solely with graphs. When we speak of a coloring, we will generally be working with letters like $abcd$ to indicate the colors on the ring. The order of these colors is indicated by the $\gg$ edge, which is the first edge between the first two vertices. We will also consider two such colorings to be \textit{equal} if they differ only by a renaming of colors.
+We will be working exclusively with \textit{planar graphs}. See Figure \ref{fig:planartut} for examples. The order of colors such as in $abcd$ is indicated by the $\gg$ edge, which is the first edge between the first two vertices. Two colorings are considered \textit{equal} if they differ only by a renaming of colors.
 
+\begin{definition}
+    A graph is \emph{planar} if it has a \emph{planar embedding} where no two edges cross each other.
+\end{definition}
 \begin{definition}
     \label{def:coleq}
     Two colorings $x$ and $y$ are \emph{equal} if they differ only by a renaming of the colors $a,b,c$ and $d$. I.e $abab = acac$.
@@ -75,4 +78,56 @@ From now on, we will leave the notion of maps and regions behind us and work sol
     Every planar graph can be colored in at most four colors.
 \end{theorem}
 
-With \textit{planar graph} we mean a graph derived from a map as in the first two graphs on the left of Figure \ref{fig:colortut}. Edges are not allowed to cross each other. The proof of this theorem required over a 100 years to complete, despite its simple statement. What would you do to prove such a statement? A first step to the proof is to work with an easier problem instead. This is the five color theorem.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[scale=1.5]
+        \coordinate (v1) at (-1, 0);
+        \coordinate (v2) at (0, 1);
+        \coordinate (v3) at (1, 0);
+        \coordinate (v4) at (0, -1);
+        \coordinate (c) at (0, 0);
+
+        \node[circle, fill, scale=0.015cm] (m1) at (-0.35, 0.35) { };
+        \node[circle, fill, scale=0.015cm] (m2) at (0.35, 0.35) { };
+        \node[circle, fill, scale=0.015cm] (m3) at (0.35, -0.35) { };
+        \node[circle, fill, scale=0.015cm] (m4) at (-0.35, -0.35) { };
+
+        \draw (m1) -- (m2);
+        \draw (m2) -- (m3) -- (m4) -- (m1);
+        \draw (m1) -- (m3);
+        \draw (m2) -- (m4);
+        \draw[opacity=0.0] (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=1.5]
+        \coordinate (v1) at (-1, 0);
+        \coordinate (v2) at (0, 1);
+        \coordinate (v3) at (1, 0);
+        \coordinate (v4) at (0, -1);
+        \coordinate (c) at (0, 0);
+
+        \node[circle, fill, scale=0.015cm] (m1) at (-0.35, 0.35) { };
+        \node[circle, fill, scale=0.015cm] (m2) at (0.35, 0.35) { };
+        \node[circle, fill, scale=0.015cm] (m3) at (0.35, -0.35) { };
+        \node[circle, fill, scale=0.015cm] (m4) at (-0.35, -0.35) { };
+
+        \draw (m2) -- (m4);
+        \draw (m1) .. controls +(0.7, 0.7) and +(0.7, 0.7) .. (m3);
+        \draw (m1) -- (m2);
+        \draw (m2) -- (m3) -- (m4) -- (m1);
+        \draw[opacity=0.0] (v1) -- (v2) -- (v3) -- (v4) -- (v1);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \node[circle, fill, scale=0.015cm] (l1) at (0, 1) { };
+        \node[circle, fill, scale=0.015cm] (l2) at (0.9, 0.30) { };
+        \node[circle, fill, scale=0.015cm] (l3) at (0.6, -0.77) {};
+        \node[circle, fill, scale=0.015cm] (l4) at (-0.6, -0.77) {};
+        \node[circle, fill, scale=0.015cm] (l5) at (-0.9, 0.30) {};
+        \node[circle, fill, scale=0cm] at (-2, -1.5) {};
+
+        \draw (l1) -- (l3) -- (l5) -- (l2) -- (l4) -- (l1);
+        \draw (l1) -- (l2) -- (l3) -- (l4) -- (l5) -- (l1);
+        
+    \end{tikzpicture}
+    \caption{A non-planar embedding of the full graph $K_4$ on 4 vertices (left). A planar embedding of $K_4$ (middle), therefore $K_4$ is a planar graph. A non-planar graph $K_5$ that has no planar embeddings (right). }
+    \label{fig:planartut}
+\end{figure}

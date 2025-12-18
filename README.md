@@ -8,5 +8,5 @@ This paper and presentation explains the essence of the 4 color theorem - reduci
 ## Corrections
 
 - On the first line of Theorem 6, $|C| > 1$ should be replaced by $|C| > 5$.
-
+- On page 13, the three conditions explaining the function of $k$, the last case $k \geq |C|$ should be $k +n \geq |C|$. There is a bit of a discrepancy with the meaning of $k$. Initially we say that $|S| \leq k + n$, but later on we say that $|S| \leq k$. The conclusion "we must require that $k < C$" should be $k + n < C$.
 
